@@ -10,8 +10,6 @@ export interface Resource {
 export interface QuizQuestion {
   question: string;
   options: string[];
-  correctIndex: number;
-  explanation: string;
 }
 
 export interface Zone {
@@ -76,9 +74,6 @@ export const zones: Zone[] = [
           'Insider knowledge',
           'Starting capital',
         ],
-        correctIndex: 1,
-        explanation:
-          'Morgan Housel shows that behavior — patience, humility, and consistency — beats raw intelligence every time.',
       },
       {
         question: 'What is compounding?',
@@ -88,9 +83,6 @@ export const zones: Zone[] = [
           'A type of bank account',
           'Mixing different currencies',
         ],
-        correctIndex: 1,
-        explanation:
-          "Compounding means your money earns money, and THAT money earns money too. It's the most powerful force in investing.",
       },
       {
         question: 'What does "enough" mean in investing?',
@@ -100,9 +92,6 @@ export const zones: Zone[] = [
           'Never spending money',
           'Only investing in safe bonds',
         ],
-        correctIndex: 1,
-        explanation:
-          'Knowing your "enough" prevents you from taking dangerous risks chasing more when you already have what you need.',
       },
       {
         question: 'Why did Warren Buffett become so wealthy?',
@@ -112,9 +101,6 @@ export const zones: Zone[] = [
           'He inherited money',
           'He only bought tech stocks',
         ],
-        correctIndex: 1,
-        explanation:
-          "Buffett started at age 11. His wealth came from 75+ years of compounding — not from being the best stock picker.",
       },
       {
         question:
@@ -125,9 +111,6 @@ export const zones: Zone[] = [
           'Having a budget',
           'Investing in index funds',
         ],
-        correctIndex: 1,
-        explanation:
-          "When emotions take over — panic selling, FOMO buying, impulse spending — you're in the Upside Down of finance.",
       },
     ],
     keyTakeaway:
@@ -187,9 +170,6 @@ export const zones: Zone[] = [
           'A type of investment',
           'When banks increase interest rates',
         ],
-        correctIndex: 1,
-        explanation:
-          'Inflation means your money loses purchasing power. $100 today buys less than $100 ten years ago.',
       },
       {
         question:
@@ -200,9 +180,6 @@ export const zones: Zone[] = [
           "You can't access your money",
           'Savings accounts have high fees',
         ],
-        correctIndex: 1,
-        explanation:
-          "If inflation is 3% and your savings account pays 1%, you're actually LOSING 2% per year in real terms.",
       },
       {
         question:
@@ -213,9 +190,6 @@ export const zones: Zone[] = [
           'Investing is only for rich people',
           'Saving gives better returns',
         ],
-        correctIndex: 1,
-        explanation:
-          'Saving = putting money aside safely. Investing = putting money to work so it grows, accepting some risk.',
       },
       {
         question:
@@ -226,9 +200,6 @@ export const zones: Zone[] = [
           '600,000 CZK',
           'Over 1,000,000 CZK',
         ],
-        correctIndex: 2,
-        explanation:
-          "Compounding turns 240,000 CZK of contributions into ~590,000 CZK. That's the magic!",
       },
     ],
     keyTakeaway:
@@ -287,9 +258,6 @@ export const zones: Zone[] = [
           'A savings account with higher interest',
           'A fund managed by Warren Buffett',
         ],
-        correctIndex: 1,
-        explanation:
-          'An index fund automatically buys ALL companies in an index. S&P 500 index fund = owning a tiny piece of 500 top US companies.',
       },
       {
         question:
@@ -300,9 +268,6 @@ export const zones: Zone[] = [
           'They pay monthly dividends',
           'They are the cheapest stocks',
         ],
-        correctIndex: 1,
-        explanation:
-          'Over 15 years, ~90% of professional fund managers LOSE to a simple S&P 500 index fund. Less effort, better results.',
       },
       {
         question: 'What is diversification?',
@@ -312,9 +277,6 @@ export const zones: Zone[] = [
           'Investing in foreign currencies',
           'Changing your investments daily',
         ],
-        correctIndex: 1,
-        explanation:
-          'Diversification = not putting all eggs in one basket. If one company fails, the others protect you.',
       },
       {
         question:
@@ -325,9 +287,6 @@ export const zones: Zone[] = [
           'Real estate always goes up',
           'Ignore warning signs',
         ],
-        correctIndex: 1,
-        explanation:
-          "The 2008 crisis happened because people invested in things they didn't understand. Always know what you own.",
       },
     ],
     keyTakeaway:
@@ -377,9 +336,6 @@ export const zones: Zone[] = [
           'Money in the bank',
           'Stock price × shares',
         ],
-        correctIndex: 1,
-        explanation:
-          'Revenue = total sales. It\'s the "top line." Profit comes AFTER subtracting all costs from revenue.',
       },
       {
         question:
@@ -390,9 +346,6 @@ export const zones: Zone[] = [
           'Profit is always bigger than revenue',
           'Revenue only counts cash payments',
         ],
-        correctIndex: 1,
-        explanation:
-          'Revenue: $100 in sales. Costs: $70. Profit: $30. Revenue is the whole pie; profit is your slice.',
       },
       {
         question: 'What does a balance sheet show?',
@@ -402,9 +355,6 @@ export const zones: Zone[] = [
           "The CEO's salary",
           'Future sales predictions',
         ],
-        correctIndex: 1,
-        explanation:
-          'Balance sheet = snapshot of health. Assets (what you own) = Liabilities (what you owe) + Equity (your stake).',
       },
       {
         question: 'Why is cash flow important?',
@@ -414,9 +364,6 @@ export const zones: Zone[] = [
           "It's not important for investors",
           'It only matters for banks',
         ],
-        correctIndex: 1,
-        explanation:
-          'Profit can be manipulated with accounting tricks. Cash flow shows REAL money movement. Cash is king.',
       },
     ],
     keyTakeaway:
@@ -466,9 +413,6 @@ export const zones: Zone[] = [
           'Follow what celebrities invest in',
           'Buy the cheapest stocks',
         ],
-        correctIndex: 1,
-        explanation:
-          "Lynch found his best investments at the mall, the grocery store, his wife's shopping bags. Everyday life = investment ideas.",
       },
       {
         question: 'What is a P/E ratio?',
@@ -478,9 +422,6 @@ export const zones: Zone[] = [
           'Profit to Expense ratio',
           'A type of stock order',
         ],
-        correctIndex: 1,
-        explanation:
-          'P/E = Stock Price ÷ Earnings Per Share. A P/E of 20 means you pay $20 for every $1 of profit. Lower = cheaper (usually).',
       },
       {
         question:
@@ -491,9 +432,6 @@ export const zones: Zone[] = [
           'Number of employees',
           'How many ads they run',
         ],
-        correctIndex: 1,
-        explanation:
-          'A company growing revenue and profit year after year is a healthy company. Short-term stock price is noise.',
       },
     ],
     keyTakeaway:
@@ -543,9 +481,6 @@ export const zones: Zone[] = [
           'Writing stock picks on paper',
           'A type of bond',
         ],
-        correctIndex: 1,
-        explanation:
-          'Paper trading lets you practice investing with virtual money. All the learning, none of the financial risk.',
       },
       {
         question: 'Why should you diversify your portfolio?',
@@ -555,9 +490,6 @@ export const zones: Zone[] = [
           "It's required by law",
           'To impress your broker',
         ],
-        correctIndex: 1,
-        explanation:
-          "Don't put all your tokens in one arcade game. Spread them across several to maximize your chances.",
       },
       {
         question:
@@ -568,9 +500,6 @@ export const zones: Zone[] = [
           'Whether to quit investing',
           'How to pick better stocks next time',
         ],
-        correctIndex: 1,
-        explanation:
-          'The goal isn\'t to "win" — it\'s to understand how you react to gains and losses. Self-awareness is the real reward.',
       },
     ],
     keyTakeaway:
@@ -611,9 +540,6 @@ export const zones: Zone[] = [
           'Yesterday. The second best time is today.',
           'After retirement',
         ],
-        correctIndex: 2,
-        explanation:
-          'Time in the market beats timing the market. The sooner you start, the more compounding works for you.',
       },
       {
         question:
@@ -624,9 +550,6 @@ export const zones: Zone[] = [
           'Regular contributions to a diversified index fund',
           'Following stock tips on social media',
         ],
-        correctIndex: 2,
-        explanation:
-          "Consistent, boring, automatic contributions to an index fund. Not exciting, but it works. Every. Single. Time.",
       },
       {
         question:
@@ -637,9 +560,6 @@ export const zones: Zone[] = [
           'That patience, knowledge, and starting early are the keys to financial freedom',
           'That you need $100,000 to start investing',
         ],
-        correctIndex: 2,
-        explanation:
-          "You don't need to be rich, smart, or an expert. You need patience, a plan, and the courage to start. You're ready. 🏆",
       },
     ],
     keyTakeaway:

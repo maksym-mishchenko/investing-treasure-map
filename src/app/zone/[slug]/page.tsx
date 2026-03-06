@@ -4,9 +4,10 @@ import { useEffect, useState, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { zones } from '@/lib/zones';
-import { isZoneUnlocked, isZoneCompleted } from '@/lib/progress';
+import { isZoneUnlocked, isZoneCompleted, completeZone } from '@/lib/progress';
 import Particles from '@/components/Particles';
 import Quiz from '@/components/Quiz';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function ZonePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -14,6 +15,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
   const zone = zones.find((z) => z.slug === slug);
   const [showQuiz, setShowQuiz] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -32,8 +34,10 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
     );
   }
 
-  const unlocked = mounted ? isZoneUnlocked(zone.id) : zone.id === 1;
-  const completed = mounted ? isZoneCompleted(zone.id) : false;
+  const username = user?.username ?? 'diana';
+  const admin = user?.role === 'admin';
+  const unlocked = mounted ? isZoneUnlocked(username, zone.id) : zone.id === 1;
+  const completed = mounted ? isZoneCompleted(username, zone.id) : false;
 
   if (mounted && !unlocked) {
     return (
@@ -48,6 +52,11 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
         </div>
       </div>
     );
+  }
+
+  function handleSkipQuiz() {
+    completeZone(username, zone!.id, zone!.quiz.length);
+    router.push('/');
   }
 
   if (showQuiz) {
@@ -71,8 +80,10 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           </div>
           <Quiz
             questions={zone.quiz}
+            zoneSlug={zone.slug}
             zoneId={zone.id}
             zoneColor={zone.color}
+            username={username}
             onComplete={() => router.push('/')}
           />
         </div>
@@ -85,7 +96,6 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
       <Particles />
 
       <div className="relative z-10 px-4 py-12 max-w-2xl mx-auto">
-        {/* Back link */}
         <Link
           href="/"
           className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
@@ -93,7 +103,6 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           ← Back to Map
         </Link>
 
-        {/* Zone Header */}
         <div className="mb-10">
           <div className="flex items-center gap-2 mb-3">
             <span
@@ -122,7 +131,6 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           <p className="text-gray-300 leading-relaxed">{zone.description}</p>
         </div>
 
-        {/* Resources */}
         <div className="mb-12">
           <h2 className="font-cinzel text-sm tracking-widest text-gray-400 mb-4">
             📚 Resources
@@ -167,7 +175,6 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           </div>
         </div>
 
-        {/* Key Takeaway */}
         <div
           className="rounded-lg border p-5 mb-10"
           style={{
@@ -181,8 +188,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           <p className="text-sm text-gray-300 leading-relaxed">{zone.keyTakeaway}</p>
         </div>
 
-        {/* Take the Quiz Button */}
-        <div className="text-center">
+        <div className="text-center space-y-3">
           <button
             onClick={() => setShowQuiz(true)}
             className="px-10 py-4 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
@@ -194,7 +200,24 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           >
             {completed ? '🔄 Retake Quiz' : '⚡ Take the Quiz'}
           </button>
-          <p className="text-xs text-gray-600 mt-3">
+
+          {admin && (
+            <div>
+              <button
+                onClick={handleSkipQuiz}
+                className="px-8 py-3 rounded-xl font-cinzel text-xs tracking-widest transition-all duration-300 hover:scale-105 border"
+                style={{
+                  borderColor: 'rgba(255,23,68,0.4)',
+                  color: 'rgba(255,23,68,0.7)',
+                  backgroundColor: 'rgba(255,23,68,0.05)',
+                }}
+              >
+                ⚡ Skip Quiz
+              </button>
+            </div>
+          )}
+
+          <p className="text-xs text-gray-600">
             {completed
               ? 'You already passed! Retake to improve your score.'
               : `Answer ${Math.ceil(zone.quiz.length * 0.6)} of ${zone.quiz.length} correctly to unlock the next zone`}

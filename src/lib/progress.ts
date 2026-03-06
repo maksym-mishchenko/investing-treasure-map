@@ -1,5 +1,3 @@
-const STORAGE_KEY = 'diana-investment-journey';
-
 interface Progress {
   completedZones: number[];
   currentZone: number;
@@ -7,38 +5,47 @@ interface Progress {
   startedAt: string;
 }
 
-export function getProgress(): Progress {
+function storageKey(username: string): string {
+  return `progress_${username}`;
+}
+
+export function isAdminMode(username: string): boolean {
+  return username === 'admin';
+}
+
+export function getProgress(username: string): Progress {
   if (typeof window === 'undefined') return defaultProgress();
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = localStorage.getItem(storageKey(username));
   return saved ? JSON.parse(saved) : defaultProgress();
 }
 
-export function saveProgress(progress: Progress): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+export function saveProgress(username: string, progress: Progress): void {
+  localStorage.setItem(storageKey(username), JSON.stringify(progress));
 }
 
-export function completeZone(zoneId: number, score: number): void {
-  const progress = getProgress();
+export function completeZone(username: string, zoneId: number, score: number): void {
+  const progress = getProgress(username);
   if (!progress.completedZones.includes(zoneId)) {
     progress.completedZones.push(zoneId);
   }
   progress.quizScores[zoneId] = score;
   progress.currentZone = Math.min(zoneId + 1, 7);
-  saveProgress(progress);
+  saveProgress(username, progress);
 }
 
-export function isZoneUnlocked(zoneId: number): boolean {
+export function isZoneUnlocked(username: string, zoneId: number): boolean {
+  if (isAdminMode(username)) return true;
   if (zoneId === 1) return true;
-  const progress = getProgress();
+  const progress = getProgress(username);
   return progress.completedZones.includes(zoneId - 1);
 }
 
-export function isZoneCompleted(zoneId: number): boolean {
-  return getProgress().completedZones.includes(zoneId);
+export function isZoneCompleted(username: string, zoneId: number): boolean {
+  return getProgress(username).completedZones.includes(zoneId);
 }
 
-export function resetProgress(): void {
-  localStorage.removeItem(STORAGE_KEY);
+export function resetProgress(username: string): void {
+  localStorage.removeItem(storageKey(username));
 }
 
 function defaultProgress(): Progress {

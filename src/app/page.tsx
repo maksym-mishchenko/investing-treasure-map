@@ -6,13 +6,17 @@ import { zones } from '@/lib/zones';
 import { isZoneUnlocked, isZoneCompleted } from '@/lib/progress';
 import Particles from '@/components/Particles';
 import MapPath from '@/components/MapPath';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const username = user?.username ?? 'diana';
 
   return (
     <div className="min-h-screen relative">
@@ -26,6 +30,11 @@ export default function Home() {
         >
           {"Diana's Investment Journey"}
         </h1>
+        {user && (
+          <p className="text-xs font-cinzel tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.6)' }}>
+            Welcome, {user.displayName}
+          </p>
+        )}
         <p className="text-gray-400 text-center text-sm sm:text-base max-w-lg mb-4">
           Navigate through Hawkins. Learn to invest. Escape the Upside Down.
         </p>
@@ -38,8 +47,8 @@ export default function Home() {
         {/* Zone Map */}
         <div className="w-full max-w-md flex flex-col items-center">
           {zones.map((zone, i) => {
-            const unlocked = mounted ? isZoneUnlocked(zone.id) : zone.id === 1;
-            const completed = mounted ? isZoneCompleted(zone.id) : false;
+            const unlocked = mounted ? isZoneUnlocked(username, zone.id) : zone.id === 1;
+            const completed = mounted ? isZoneCompleted(username, zone.id) : false;
             const isCurrent = unlocked && !completed;
 
             return (

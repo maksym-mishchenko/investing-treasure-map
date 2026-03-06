@@ -4,107 +4,207 @@ import { useState, useCallback } from 'react';
 import type { QuizQuestion } from '@/lib/zones';
 import { completeZone } from '@/lib/progress';
 
+interface QuestionResult {
+  questionIndex: number;
+  correct: boolean;
+  correctIndex: number;
+  explanation: string;
+}
+
+interface ApiResponse {
+  score: number;
+  total: number;
+  passed: boolean;
+  results: QuestionResult[];
+}
+
 interface QuizProps {
   questions: QuizQuestion[];
+  zoneSlug: string;
   zoneId: number;
   zoneColor: string;
+  username: string;
   onComplete: () => void;
 }
 
-export default function Quiz({ questions, zoneId, zoneColor, onComplete }: QuizProps) {
+export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username, onComplete }: QuizProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [score, setScore] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
+  const [userAnswers, setUserAnswers] = useState<number[]>([]);
   const [finished, setFinished] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState(() =>
+  const [submitting, setSubmitting] = useState(false);
+  const [apiResult, setApiResult] = useState<ApiResponse | null>(null);
+  const [shuffledQuestions] = useState(() =>
     [...questions].sort(() => Math.random() - 0.5)
   );
 
   const current = shuffledQuestions[currentIdx];
-  const isCorrect = selectedOption === current?.correctIndex;
-  const passingScore = Math.ceil(shuffledQuestions.length * 0.6);
-  const passed = score >= passingScore;
 
   const handleSelect = useCallback(
     (idx: number) => {
-      if (showResult) return;
       setSelectedOption(idx);
-      setShowResult(true);
-      if (idx === current.correctIndex) {
-        setScore((s) => s + 1);
-      }
     },
-    [showResult, current]
+    []
   );
 
   const handleNext = useCallback(() => {
+    if (selectedOption === null) return;
+
+    const newAnswers = [...userAnswers, selectedOption];
+    setUserAnswers(newAnswers);
+    setSelectedOption(null);
+
     if (currentIdx + 1 >= shuffledQuestions.length) {
-      const finalScore = score + (isCorrect ? 0 : 0);
       setFinished(true);
-      if (finalScore >= passingScore) {
-        completeZone(zoneId, finalScore);
-      }
     } else {
       setCurrentIdx((i) => i + 1);
-      setSelectedOption(null);
-      setShowResult(false);
     }
-  }, [currentIdx, shuffledQuestions.length, score, isCorrect, passingScore, zoneId]);
+  }, [currentIdx, shuffledQuestions.length, selectedOption, userAnswers]);
+
+  const handleSubmit = useCallback(async () => {
+    setSubmitting(true);
+
+    const orderedAnswers = questions.map((originalQ) => {
+      const shuffledIdx = shuffledQuestions.findIndex((q) => q.question === originalQ.question);
+      return userAnswers[shuffledIdx];
+    });
+
+    const res = await fetch('/api/quiz/check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ zoneSlug, answers: orderedAnswers }),
+    });
+    const data: ApiResponse = await res.json();
+    setApiResult(data);
+
+    if (data.passed) {
+      completeZone(username, zoneId, data.score);
+    }
+
+    setSubmitting(false);
+  }, [questions, shuffledQuestions, userAnswers, zoneSlug, zoneId]);
 
   const handleRetry = useCallback(() => {
-    setShuffledQuestions([...questions].sort(() => Math.random() - 0.5));
     setCurrentIdx(0);
-    setScore(0);
     setSelectedOption(null);
-    setShowResult(false);
+    setUserAnswers([]);
     setFinished(false);
-  }, [questions]);
+    setApiResult(null);
+    setSubmitting(false);
+  }, []);
+
+  if (apiResult) {
+    const { score, total, passed, results } = apiResult;
+    const passingCount = Math.ceil(total * 0.6);
+
+    return (
+      <div className="max-w-xl mx-auto py-12 px-4">
+        <div className="text-center mb-10">
+          <div
+            className="text-6xl mb-6"
+            style={{ textShadow: `0 0 30px ${zoneColor}` }}
+          >
+            {passed ? '🎉' : '💀'}
+          </div>
+          <h2
+            className="text-3xl font-cinzel mb-4"
+            style={{ color: passed ? zoneColor : '#ff1744' }}
+          >
+            {passed ? 'Zone Completed!' : 'The Upside Down Got You'}
+          </h2>
+          <p className="text-lg text-gray-300 mb-2">
+            Score: {score} / {total}
+          </p>
+          <p className="text-sm text-gray-500 mb-8">
+            {passed
+              ? 'The next zone is now unlocked. Keep going!'
+              : `You need ${passingCount} correct answers to pass. Review the resources and try again.`}
+          </p>
+        </div>
+
+        <div className="space-y-4 mb-10">
+          {shuffledQuestions.map((q, shuffledIdx) => {
+            const originalIdx = questions.findIndex((oq) => oq.question === q.question);
+            const result = results.find((r) => r.questionIndex === originalIdx);
+            if (!result) return null;
+
+            return (
+              <div
+                key={shuffledIdx}
+                className="rounded-lg border p-4"
+                style={{
+                  borderColor: result.correct ? '#4caf5040' : '#ff174440',
+                  backgroundColor: result.correct
+                    ? 'rgba(76,175,80,0.05)'
+                    : 'rgba(255,23,68,0.05)',
+                }}
+              >
+                <p className="text-sm font-semibold mb-1" style={{ color: result.correct ? '#4caf50' : '#ff1744' }}>
+                  {result.correct ? '✓ Correct' : '✗ Incorrect'} — Q{shuffledIdx + 1}
+                </p>
+                <p className="text-sm text-gray-300 mb-2">{q.question}</p>
+                {!result.correct && (
+                  <p className="text-xs text-gray-500 mb-1">
+                    Correct answer: <span className="text-gray-300">{q.options[result.correctIndex]}</span>
+                  </p>
+                )}
+                <p className="text-xs text-gray-400">{result.explanation}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {passed ? (
+          <div className="text-center">
+            <button
+              onClick={onComplete}
+              className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
+              style={{
+                backgroundColor: zoneColor,
+                color: '#0a0a0a',
+                boxShadow: `0 0 20px ${zoneColor}80`,
+              }}
+            >
+              Continue Journey →
+            </button>
+          </div>
+        ) : (
+          <div className="text-center">
+            <button
+              onClick={handleRetry}
+              className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest border transition-all hover:bg-white/5"
+              style={{ borderColor: '#ff1744', color: '#ff1744' }}
+            >
+              Try Again
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   if (finished) {
     return (
       <div className="max-w-xl mx-auto text-center py-12 px-4">
-        <div
-          className="text-6xl mb-6"
-          style={{ textShadow: `0 0 30px ${zoneColor}` }}
-        >
-          {passed ? '🎉' : '💀'}
-        </div>
-        <h2
-          className="text-3xl font-cinzel mb-4"
-          style={{ color: passed ? zoneColor : '#ff1744' }}
-        >
-          {passed ? 'Zone Completed!' : 'The Upside Down Got You'}
+        <div className="text-5xl mb-6">📋</div>
+        <h2 className="text-2xl font-cinzel mb-4" style={{ color: zoneColor }}>
+          All Questions Answered
         </h2>
-        <p className="text-lg text-gray-300 mb-2">
-          Score: {score} / {shuffledQuestions.length}
+        <p className="text-gray-400 mb-8">
+          You answered all {shuffledQuestions.length} questions. Ready to see your results?
         </p>
-        <p className="text-sm text-gray-500 mb-8">
-          {passed
-            ? 'The next zone is now unlocked. Keep going!'
-            : `You need ${passingScore} correct answers to pass. Review the resources and try again.`}
-        </p>
-        {passed ? (
-          <button
-            onClick={onComplete}
-            className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
-            style={{
-              backgroundColor: zoneColor,
-              color: '#0a0a0a',
-              boxShadow: `0 0 20px ${zoneColor}80`,
-            }}
-          >
-            Continue Journey →
-          </button>
-        ) : (
-          <button
-            onClick={handleRetry}
-            className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest border transition-all hover:bg-white/5"
-            style={{ borderColor: '#ff1744', color: '#ff1744' }}
-          >
-            Try Again
-          </button>
-        )}
+        <button
+          onClick={handleSubmit}
+          disabled={submitting}
+          className="px-10 py-4 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            backgroundColor: zoneColor,
+            color: '#0a0a0a',
+            boxShadow: `0 0 30px ${zoneColor}40`,
+          }}
+        >
+          {submitting ? 'Checking...' : 'Submit Quiz'}
+        </button>
       </div>
     );
   }
@@ -115,8 +215,8 @@ export default function Quiz({ questions, zoneId, zoneColor, onComplete }: QuizP
         <span className="text-xs text-gray-500 font-cinzel tracking-widest">
           Question {currentIdx + 1} of {shuffledQuestions.length}
         </span>
-        <span className="text-xs" style={{ color: zoneColor }}>
-          Score: {score}
+        <span className="text-xs text-gray-500">
+          {userAnswers.length} answered
         </span>
       </div>
 
@@ -137,35 +237,17 @@ export default function Quiz({ questions, zoneId, zoneColor, onComplete }: QuizP
 
       <div className="space-y-3 mb-8">
         {current.options.map((opt, idx) => {
-          let borderColor = 'rgba(255,255,255,0.1)';
-          let bg = 'transparent';
-          let textColor = '#ededed';
-
-          if (showResult) {
-            if (idx === current.correctIndex) {
-              borderColor = '#4caf50';
-              bg = 'rgba(76,175,80,0.1)';
-              textColor = '#4caf50';
-            } else if (idx === selectedOption && idx !== current.correctIndex) {
-              borderColor = '#ff1744';
-              bg = 'rgba(255,23,68,0.1)';
-              textColor = '#ff1744';
-            }
-          } else if (idx === selectedOption) {
-            borderColor = zoneColor;
-          }
+          const isSelected = idx === selectedOption;
 
           return (
             <button
               key={idx}
               onClick={() => handleSelect(idx)}
-              disabled={showResult}
               className="w-full text-left px-5 py-4 rounded-lg border transition-all duration-200 hover:border-white/30"
               style={{
-                borderColor,
-                backgroundColor: bg,
-                color: textColor,
-                cursor: showResult ? 'default' : 'pointer',
+                borderColor: isSelected ? zoneColor : 'rgba(255,255,255,0.1)',
+                backgroundColor: isSelected ? `${zoneColor}15` : 'transparent',
+                color: '#ededed',
               }}
             >
               <span className="text-xs text-gray-500 mr-3">
@@ -177,24 +259,7 @@ export default function Quiz({ questions, zoneId, zoneColor, onComplete }: QuizP
         })}
       </div>
 
-      {showResult && (
-        <div
-          className="rounded-lg p-4 mb-6 border"
-          style={{
-            borderColor: isCorrect ? '#4caf5040' : '#ff174440',
-            backgroundColor: isCorrect
-              ? 'rgba(76,175,80,0.05)'
-              : 'rgba(255,23,68,0.05)',
-          }}
-        >
-          <p className="text-sm font-semibold mb-1" style={{ color: isCorrect ? '#4caf50' : '#ff1744' }}>
-            {isCorrect ? '✓ Correct!' : '✗ Not quite'}
-          </p>
-          <p className="text-sm text-gray-400">{current.explanation}</p>
-        </div>
-      )}
-
-      {showResult && (
+      {selectedOption !== null && (
         <button
           onClick={handleNext}
           className="w-full py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
@@ -204,7 +269,7 @@ export default function Quiz({ questions, zoneId, zoneColor, onComplete }: QuizP
             boxShadow: `0 0 15px ${zoneColor}60`,
           }}
         >
-          {currentIdx + 1 >= shuffledQuestions.length ? 'See Results' : 'Next Question →'}
+          {currentIdx + 1 >= shuffledQuestions.length ? 'See Results →' : 'Next Question →'}
         </button>
       )}
     </div>
