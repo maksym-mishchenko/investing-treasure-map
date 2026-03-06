@@ -1,0 +1,36 @@
+import type { Metadata } from "next";
+import { Cinzel, Inter } from "next/font/google";
+import "./globals.css";
+
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Diana's Investment Journey",
+  description: "A Stranger Things themed investment learning journey.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="dark">
+      <body
+        className={`${cinzel.variable} ${inter.variable} antialiased min-h-screen relative`}
+      >
+        <div className="fixed inset-0 bg-black/50 pointer-events-none z-[-1]" />
+        {children}
+      </body>
+    </html>
+  );
+}
