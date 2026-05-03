@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { zones } from '@/lib/zones';
 import { isZoneUnlocked, isZoneCompleted } from '@/lib/progress';
@@ -10,13 +10,35 @@ import { useAuth } from '@/components/AuthProvider';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
+    setFeedbackSent(localStorage.getItem('feedback_sent') === 'true');
   }, []);
 
   const username = user?.username ?? 'guest';
+  const completedCount = mounted ? zones.filter(z => isZoneCompleted(username, z.id)).length : 0;
+  const totalZones = zones.length;
+  const allCompleted = completedCount === totalZones;
+  const pct = Math.round((completedCount / totalZones) * 100);
+
+  const sendFeedback = useCallback(async (type: string, message?: string) => {
+    if (feedbackLoading) return;
+    setFeedbackLoading(true);
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, message }),
+      });
+      setFeedbackSent(true);
+      localStorage.setItem('feedback_sent', 'true');
+    } catch { /* ignore */ }
+    setFeedbackLoading(false);
+  }, [feedbackLoading]);
 
   return (
     <div className="min-h-screen relative">
@@ -38,6 +60,40 @@ export default function Home() {
         <p className="text-gray-400 text-center text-sm sm:text-base max-w-lg mb-4">
           Navigate through Hawkins. Learn to invest. Escape the Upside Down.
         </p>
+
+        {/* Progress Bar */}
+        {mounted && completedCount > 0 && (
+          <div className="w-full max-w-md mb-6">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] font-cinzel tracking-widest text-gray-500">
+                Progress
+              </span>
+              <span className="text-[10px] font-cinzel tracking-widest" style={{ color: allCompleted ? '#00e5ff' : '#ff1744' }}>
+                {completedCount}/{totalZones} zones
+              </span>
+            </div>
+            <div className="w-full h-1.5 rounded-full bg-gray-800 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-700 ease-out"
+                style={{
+                  width: `${pct}%`,
+                  background: allCompleted
+                    ? 'linear-gradient(90deg, #00e5ff, #00bcd4)'
+                    : 'linear-gradient(90deg, #ff1744, #ff5252)',
+                  boxShadow: allCompleted
+                    ? '0 0 8px rgba(0,229,255,0.5)'
+                    : '0 0 8px rgba(255,23,68,0.4)',
+                }}
+              />
+            </div>
+            {allCompleted && (
+              <p className="text-center text-[10px] font-cinzel tracking-widest mt-2" style={{ color: '#00e5ff' }}>
+                🏆 Journey Complete — You escaped the Upside Down!
+              </p>
+            )}
+          </div>
+        )}
+
         <div className="flex items-center gap-2 text-xs text-gray-600 mb-12">
           <span className="inline-block w-2 h-2 rounded-full bg-[#00e5ff]" /> Completed
           <span className="inline-block w-2 h-2 rounded-full bg-[#ffab00] ml-3" /> Current
@@ -138,6 +194,53 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* Feedback */}
+        {mounted && (
+          <div className="mt-16 w-full max-w-md">
+            {feedbackSent ? (
+              <div className="text-center">
+                <p className="text-xs font-cinzel tracking-widest" style={{ color: '#00e5ff' }}>
+                  ❤️ Thanks for your feedback!
+                </p>
+              </div>
+            ) : (
+              <div className="border border-gray-800 rounded-xl p-5 text-center" style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}>
+                <p className="text-xs font-cinzel tracking-widest text-gray-400 mb-4">
+                  How&apos;s the journey?
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <button
+                    onClick={() => sendFeedback('liked')}
+                    disabled={feedbackLoading}
+                    className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744] hover:scale-105 disabled:opacity-50"
+                    style={{ color: 'rgba(255,23,68,0.7)' }}
+                  >
+                    ❤️ I liked it
+                  </button>
+                  <button
+                    onClick={() => sendFeedback('want-more')}
+                    disabled={feedbackLoading}
+                    className="text-[10px] font-cinzel tracking-widest border border-[#ffab00]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ffab00] hover:text-[#ffab00] hover:scale-105 disabled:opacity-50"
+                    style={{ color: 'rgba(255,171,0,0.7)' }}
+                  >
+                    📬 Want more content
+                  </button>
+                  {allCompleted && (
+                    <button
+                      onClick={() => sendFeedback('completed')}
+                      disabled={feedbackLoading}
+                      className="text-[10px] font-cinzel tracking-widest border border-[#00e5ff]/30 px-4 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff] hover:scale-105 disabled:opacity-50"
+                      style={{ color: 'rgba(0,229,255,0.7)' }}
+                    >
+                      🏆 I finished it all!
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Footer */}
         <div className="mt-16 text-center">
