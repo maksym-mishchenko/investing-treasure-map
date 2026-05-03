@@ -60,30 +60,18 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
   return (
     <AuthContext.Provider value={{ user, loading, refresh: fetchUser }}>
-      {pathname !== '/login' && (
+      {pathname !== '/login' && user && (
         <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
-          {user ? (
-            <>
-              <span className="text-xs text-gray-500 font-cinzel tracking-widest">
-                {user.displayName}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
-                style={{ color: 'rgba(255,23,68,0.6)' }}
-              >
-                Exit Hawkins
-              </button>
-            </>
-          ) : (
-            <a
-              href="/login"
-              className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
-              style={{ color: 'rgba(255,23,68,0.6)' }}
-            >
-              Sign In
-            </a>
-          )}
+          <span className="text-xs text-gray-500 font-cinzel tracking-widest">
+            {user.displayName}
+          </span>
+          <button
+            onClick={handleLogout}
+            className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+            style={{ color: 'rgba(255,23,68,0.6)' }}
+          >
+            Exit Hawkins
+          </button>
         </div>
       )}
       {children}
