@@ -12,11 +12,13 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [stats, setStats] = useState<{ liked: number; 'want-more': number; completed: number; total: number } | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
     setFeedbackSent(localStorage.getItem('feedback_sent') === 'true');
+    fetch('/api/feedback/stats').then(r => r.json()).then(setStats).catch(() => {});
   }, []);
 
   const username = user?.username ?? 'guest';
@@ -239,6 +241,17 @@ export default function Home() {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Community Stats */}
+        {mounted && stats && stats.total > 0 && (
+          <div className="mt-6 w-full max-w-md text-center">
+            <div className="flex justify-center gap-6 text-[10px] font-cinzel tracking-widest text-gray-500">
+              {stats.liked > 0 && <span>❤️ {stats.liked} liked</span>}
+              {stats.completed > 0 && <span>🏆 {stats.completed} finished</span>}
+              {stats['want-more'] > 0 && <span>📬 {stats['want-more']} want more</span>}
+            </div>
           </div>
         )}
 

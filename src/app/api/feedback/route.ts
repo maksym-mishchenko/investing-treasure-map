@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "";
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "";
+const STATS_API_URL = "https://api.mmishchenko.dev/api/feedback-stats";
+const STATS_API_KEY = process.env.FEEDBACK_STATS_API_KEY ?? "";
 
 // Rate limit: 1 feedback per IP per 10 minutes
 const recentFeedback = new Map<string, number>();
@@ -55,6 +57,19 @@ export async function POST(request: NextRequest) {
       });
     } catch {
       // Non-critical — still return success
+    }
+  }
+
+  // Store stats on dashboard
+  if (STATS_API_KEY) {
+    try {
+      await fetch(STATS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-api-key": STATS_API_KEY },
+        body: JSON.stringify({ type, ip }),
+      });
+    } catch {
+      // Non-critical
     }
   }
 
