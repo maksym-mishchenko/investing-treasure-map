@@ -35,6 +35,11 @@ export default function Home() {
             Welcome, {user.displayName}
           </p>
         )}
+        {!user && (
+          <p className="text-xs font-cinzel tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.4)' }}>
+            <a href="/login" className="hover:underline">Sign in</a> to save your progress
+          </p>
+        )}
         <p className="text-gray-400 text-center text-sm sm:text-base max-w-lg mb-4">
           Navigate through Hawkins. Learn to invest. Escape the Upside Down.
         </p>
