@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Diana's Investment Journey",
+  title: "Investment Treasure Map",
   description: "A Stranger Things themed investment learning journey.",
 };
 

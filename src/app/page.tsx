@@ -16,7 +16,7 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  const username = user?.username ?? 'diana';
+  const username = user?.username ?? 'guest';
 
   return (
     <div className="min-h-screen relative">
@@ -28,7 +28,7 @@ export default function Home() {
           className="text-3xl sm:text-5xl md:text-6xl font-cinzel text-center mb-3 neon-glow"
           style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
         >
-          {"Diana's Investment Journey"}
+          {"Investment Treasure Map"}
         </h1>
         {user && (
           <p className="text-xs font-cinzel tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.6)' }}>

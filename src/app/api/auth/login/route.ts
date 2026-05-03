@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const USERS: Record<string, { password: string; role: "admin" | "user"; displayName: string }> = {
   admin: { password: process.env.ADMIN_PASSWORD ?? "", role: "admin", displayName: "Admin" },
-  diana: { password: process.env.DIANA_PASSWORD ?? "", role: "user", displayName: "Diana" },
+  guest: { password: process.env.GUEST_PASSWORD ?? "", role: "user", displayName: "Explorer" },
 };
 
 export async function POST(request: NextRequest) {

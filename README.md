@@ -71,7 +71,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the treasure map.
 | Variable | Description |
 |----------|-------------|
 | `ADMIN_PASSWORD` | Password for admin account |
-| `DIANA_PASSWORD` | Password for user account |
+| `GUEST_PASSWORD` | Password for guest account |
 
 ## 📜 License
 

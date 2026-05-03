@@ -553,7 +553,7 @@ export const zones: Zone[] = [
       },
       {
         question:
-          "You've completed Diana's Investment Journey! What's the most important thing you learned?",
+          "You've completed the Investment Treasure Map! What's the most important thing you learned?",
         options: [
           'How to get rich quick',
           'That investing is only for experts',
