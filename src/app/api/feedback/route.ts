@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
   const { type, message } = body as { type?: string; message?: string };
 
-  const validTypes = ["liked", "want-more", "completed", "zone-rating", "completion"];
+  const validTypes = ["liked", "want-more", "completed", "zone-rating", "completion", "feedback", "topic-request", "report-issue"];
   if (typeof type !== "string" || !validTypes.includes(type)) {
     return Response.json({ error: "Invalid feedback type" }, { status: 400 });
   }
@@ -70,6 +70,18 @@ export async function POST(request: NextRequest) {
       lines[0] = `${emoji} *Journey Completed!*`;
       lines.push(`Rating: ${ratingValue}`);
       if (message) lines.push(`Feedback: ${message}`);
+    } else if (type === "feedback") {
+      emoji = "💬";
+      lines[0] = `${emoji} *General Feedback*`;
+      if (message) lines.push(message);
+    } else if (type === "topic-request") {
+      emoji = "📚";
+      lines[0] = `${emoji} *Topic Request*`;
+      if (message) lines.push(message);
+    } else if (type === "report-issue") {
+      emoji = "🐛";
+      lines[0] = `${emoji} *Issue Report*`;
+      if (message) lines.push(message);
     } else {
       lines[0] = `${emoji} ${lines[0]}`;
       lines.push(`Type: ${type}`);

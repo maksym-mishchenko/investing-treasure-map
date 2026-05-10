@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { zones } from '@/lib/zones';
 import { isZoneUnlocked, isZoneCompleted } from '@/lib/progress';
@@ -8,17 +8,15 @@ import Particles from '@/components/Particles';
 import MapPath from '@/components/MapPath';
 import { useAuth } from '@/components/AuthProvider';
 import CurriculumUpdateModal from '@/components/CurriculumUpdateModal';
+import FeedbackForm from '@/components/FeedbackForm';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [feedbackSent, setFeedbackSent] = useState(false);
-  const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [stats, setStats] = useState<{ liked: number; 'want-more': number; completed: number; total: number } | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
-    setFeedbackSent(localStorage.getItem('feedback_sent') === 'true');
     fetch('/api/feedback/stats').then(r => r.json()).then(setStats).catch(() => {});
   }, []);
 
@@ -27,21 +25,6 @@ export default function Home() {
   const totalZones = zones.length;
   const allCompleted = completedCount === totalZones;
   const pct = Math.round((completedCount / totalZones) * 100);
-
-  const sendFeedback = useCallback(async (type: string, message?: string) => {
-    if (feedbackLoading) return;
-    setFeedbackLoading(true);
-    try {
-      await fetch('/api/feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, message }),
-      });
-      setFeedbackSent(true);
-      localStorage.setItem('feedback_sent', 'true');
-    } catch { /* ignore */ }
-    setFeedbackLoading(false);
-  }, [feedbackLoading]);
 
   return (
     <div className="min-h-screen relative">
@@ -199,52 +182,8 @@ export default function Home() {
           })}
         </div>
 
-        {/* Feedback */}
-        {mounted && (
-          <div className="mt-16 w-full max-w-md">
-            {feedbackSent ? (
-              <div className="text-center">
-                <p className="text-xs font-cinzel tracking-widest" style={{ color: '#00e5ff' }}>
-                  ❤️ Thanks for your feedback!
-                </p>
-              </div>
-            ) : (
-              <div className="border border-gray-800 rounded-xl p-5 text-center" style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}>
-                <p className="text-xs font-cinzel tracking-widest text-gray-400 mb-4">
-                  How&apos;s the journey?
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  <button
-                    onClick={() => sendFeedback('liked')}
-                    disabled={feedbackLoading}
-                    className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744] hover:scale-105 disabled:opacity-50"
-                    style={{ color: 'rgba(255,23,68,0.7)' }}
-                  >
-                    ❤️ I liked it
-                  </button>
-                  <button
-                    onClick={() => sendFeedback('want-more')}
-                    disabled={feedbackLoading}
-                    className="text-[10px] font-cinzel tracking-widest border border-[#ffab00]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ffab00] hover:text-[#ffab00] hover:scale-105 disabled:opacity-50"
-                    style={{ color: 'rgba(255,171,0,0.7)' }}
-                  >
-                    📬 Want more content
-                  </button>
-                  {allCompleted && (
-                    <button
-                      onClick={() => sendFeedback('completed')}
-                      disabled={feedbackLoading}
-                      className="text-[10px] font-cinzel tracking-widest border border-[#00e5ff]/30 px-4 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff] hover:scale-105 disabled:opacity-50"
-                      style={{ color: 'rgba(0,229,255,0.7)' }}
-                    >
-                      🏆 I finished it all!
-                    </button>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+        {/* Feedback Form */}
+        {mounted && <FeedbackForm />}
 
         {/* Community Stats */}
         {mounted && stats && stats.total > 0 && (
