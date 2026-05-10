@@ -29,223 +29,138 @@ export interface Zone {
 export const zones: Zone[] = [
   {
     id: 1,
-    slug: 'money-mindset',
-    name: "The Mind Flayer's Grip",
-    subtitle: 'Understanding your money psychology',
-    icon: '🧠',
-    hawkinsLocation: 'Hawkins Middle School',
-    color: '#ff1744',
-    description:
-      'Before you invest a single crown, understand your relationship with money. Your emotions are the real Mind Flayer — controlling your financial decisions from the shadows.',
-    resources: [
-      {
-        type: 'book',
-        title: 'The Psychology of Money',
-        author: 'Morgan Housel',
-        description:
-          'THE starting point. Short chapters, story-based, no jargon. Teaches why behavior beats intelligence.',
-        emoji: '📖',
-      },
-      {
-        type: 'movie',
-        title: 'Becoming Warren Buffett',
-        author: 'HBO',
-        description:
-          "See how the world's greatest investor thinks. Spoiler: it's simpler than you think.",
-        emoji: '🎬',
-      },
-      {
-        type: 'podcast',
-        title: 'Planet Money: "The Invention of Money"',
-        author: 'NPR',
-        description:
-          'Fun storytelling about what money actually is and why we trust it.',
-        url: 'https://www.npr.org/sections/money/',
-        emoji: '🎧',
-      },
-    ],
-    quiz: [
-      {
-        question:
-          'According to "The Psychology of Money", what matters MORE in investing?',
-        options: [
-          'Mathematical skill',
-          'Behavior and patience',
-          'Insider knowledge',
-          'Starting capital',
-        ],
-      },
-      {
-        question: 'What is compounding?',
-        options: [
-          'Buying many stocks at once',
-          'Earning returns on your returns over time',
-          'A type of bank account',
-          'Mixing different currencies',
-        ],
-      },
-      {
-        question: 'What does "enough" mean in investing?',
-        options: [
-          'Having exactly $1 million',
-          'Knowing when to stop taking unnecessary risks',
-          'Never spending money',
-          'Only investing in safe bonds',
-        ],
-      },
-      {
-        question: 'Why did Warren Buffett become so wealthy?',
-        options: [
-          'He took huge risks',
-          'He started investing at 11 and never stopped (compounding)',
-          'He inherited money',
-          'He only bought tech stocks',
-        ],
-      },
-      {
-        question:
-          'What is the "Upside Down" of money management?',
-        options: [
-          'Saving too much',
-          'Letting emotions control your financial decisions',
-          'Having a budget',
-          'Investing in index funds',
-        ],
-      },
-    ],
-    keyTakeaway:
-      "Money is emotional, not mathematical. Patience beats cleverness. Escape the Mind Flayer's grip on your financial emotions.",
-  },
-  {
-    id: 2,
-    slug: 'economy-basics',
-    name: 'The Gate Opens',
-    subtitle: 'How the economy really works',
+    slug: 'why-investing',
+    name: 'The Upside Down',
+    subtitle: 'Why Investing Beats Saving',
     icon: '🌀',
     hawkinsLocation: 'The Gate (Hawkins Lab)',
-    color: '#e040fb',
+    color: '#ff1744',
     description:
-      "The Gate between our world and the Upside Down is like inflation — invisible, always open, slowly consuming your savings if you don't protect them.",
+      "Inflation is the Upside Down — silently eating your savings. This zone covers why keeping money in a savings account loses value over time, how compound interest works, and the real cost of doing nothing. No latte lectures — just math.",
     resources: [
       {
         type: 'movie',
-        title: 'Money Explained (Netflix)',
-        author: 'Netflix',
+        title: 'How the Economic Machine Works',
+        author: 'Ray Dalio',
         description:
-          "Animated series. Episode 1 explains why saving alone isn't enough.",
+          'A billionaire hedge fund founder explains the entire economy in 30 minutes. Free on YouTube — arguably the best economics explainer ever made.',
+        url: 'https://www.youtube.com/watch?v=PHe0bXAIuk0',
         emoji: '🎬',
       },
-      {
-        type: 'podcast',
-        title: 'The Indicator from Planet Money',
-        author: 'NPR',
-        description:
-          'Bite-sized episodes (10 min). Covers inflation, jobs, economy simply.',
-        url: 'https://www.npr.org/sections/the-indicator/',
-        emoji: '🎧',
-      },
-      {
-        type: 'article',
-        title: 'Investopedia: Investing for Beginners',
-        author: 'Investopedia',
-        description:
-          'Free, well-written guide covering stocks, bonds, and cash.',
-        url: 'https://www.investopedia.com/articles/basics/06/invest1000.asp',
-        emoji: '📰',
-      },
-      {
-        type: 'interactive',
-        title: 'Compound Interest Calculator',
-        description:
-          'See how 1000 CZK/month grows over 20 years. This will blow your mind.',
-        emoji: '🔮',
-      },
-    ],
-    quiz: [
-      {
-        question: 'What is inflation?',
-        options: [
-          'When stock prices go up',
-          'When prices rise and money buys less over time',
-          'A type of investment',
-          'When banks increase interest rates',
-        ],
-      },
-      {
-        question:
-          'Why are savings accounts NOT enough to grow wealth?',
-        options: [
-          'Banks are unsafe',
-          'Interest rates are usually lower than inflation',
-          "You can't access your money",
-          'Savings accounts have high fees',
-        ],
-      },
-      {
-        question:
-          'What is the difference between saving and investing?',
-        options: [
-          'There is no difference',
-          'Saving preserves money; investing grows it (with risk)',
-          'Investing is only for rich people',
-          'Saving gives better returns',
-        ],
-      },
-      {
-        question:
-          'If you invest 1000 CZK/month for 20 years at 8% return, roughly how much would you have?',
-        options: [
-          '240,000 CZK',
-          '400,000 CZK',
-          '600,000 CZK',
-          'Over 1,000,000 CZK',
-        ],
-      },
-    ],
-    keyTakeaway:
-      'Inflation is the invisible gate. Your savings are being consumed. Investing is how you close the gate and protect your future.',
-  },
-  {
-    id: 3,
-    slug: 'index-funds',
-    name: "Eleven's Shield",
-    subtitle: 'The power of index funds',
-    icon: '🛡️',
-    hawkinsLocation: 'The Void',
-    color: '#00e5ff',
-    description:
-      "Like Eleven's psychic shield, index funds protect you from making bad individual stock picks. One fund = hundreds of companies. Simple. Powerful.",
-    resources: [
       {
         type: 'book',
         title: 'The Simple Path to Wealth',
         author: 'JL Collins',
         description:
-          'Written as letters to his daughter. "Buy VTSAX and chill." The gospel of index investing.',
+          'Written as letters to his daughter. No jargon, no BS — just the case for why you must invest and how to do it simply.',
         emoji: '📖',
       },
+      {
+        type: 'podcast',
+        title: 'The Plain Bagel',
+        author: 'Richard Coffin',
+        description:
+          'Clear, no-hype explanations of investing concepts. A Canadian finance YouTuber respected for accuracy and simplicity.',
+        url: 'https://www.youtube.com/@ThePlainBagel',
+        emoji: '🎧',
+      },
+    ],
+    quiz: [
+      {
+        question: 'What does inflation do to your savings?',
+        options: [
+          'Increases their value over time',
+          'Reduces their purchasing power over time',
+          'Has no effect on savings accounts',
+          'Only affects cash, not bank deposits',
+        ],
+      },
+      {
+        question:
+          'If inflation is 5% and your savings account pays 2%, what happens?',
+        options: [
+          'You gain 7% in real terms',
+          'You lose about 3% of purchasing power each year',
+          'You break even',
+          'The bank covers the difference',
+        ],
+      },
+      {
+        question: 'What is compound interest?',
+        options: [
+          'Interest paid only on your initial deposit',
+          'Earning returns on your returns over time',
+          'A special type of savings account',
+          'Interest that compounds only annually',
+        ],
+      },
+      {
+        question:
+          'You have $10,000 in a savings account for 10 years at 1% interest while inflation averages 3%. In real terms, you:',
+        options: [
+          'Gained money',
+          'Lost money — your purchasing power decreased',
+          'Broke even',
+          'It depends on the stock market',
+        ],
+      },
+      {
+        question:
+          'According to Ray Dalio, what drives the economy in the short term?',
+        options: [
+          'Stock market performance',
+          'Credit and debt cycles',
+          'Government spending alone',
+          'Consumer confidence surveys',
+        ],
+      },
+    ],
+    keyTakeaway:
+      "Every year you don't invest, inflation takes a bite. Compound interest is the most powerful force in finance — but only if you start.",
+  },
+  {
+    id: 2,
+    slug: 'index-funds',
+    name: "Eleven's Shield",
+    subtitle: 'Index Funds & the S&P 500',
+    icon: '🛡️',
+    hawkinsLocation: 'The Void',
+    color: '#e040fb',
+    description:
+      "Like Eleven's psychic shield, index funds protect you from making bad individual stock picks. One fund = hundreds of companies. Over 90% of professional fund managers fail to beat the S&P 500 over 15 years. The data is clear.",
+    resources: [
       {
         type: 'movie',
         title: 'The Big Short',
         author: '2015 Film',
         description:
-          "Shows what happens when people DON'T understand their investments. Scary but essential.",
+          "Shows what happens when people don't understand their investments. Entertaining, terrifying, and essential viewing for any investor.",
         emoji: '🎬',
       },
       {
-        type: 'podcast',
-        title: 'Stacking Benjamins: Index Funds 101',
-        author: 'Stacking Benjamins',
+        type: 'book',
+        title: 'A Random Walk Down Wall Street',
+        author: 'Burton Malkiel',
         description:
-          'Why most fund managers LOSE to a simple index fund.',
+          "The academic case for why picking stocks is mostly futile. First published in 1973, still relevant — because the data hasn't changed.",
+        emoji: '📖',
+      },
+      {
+        type: 'podcast',
+        title: 'Rational Reminder',
+        author: 'Ben Felix & Cameron Passmore',
+        description:
+          'Evidence-based investing podcast. Respected in the financial community for rigorous, data-driven analysis.',
+        url: 'https://rationalreminder.ca/',
         emoji: '🎧',
       },
       {
         type: 'article',
-        title: 'What is the S&P 500?',
+        title: 'Bogleheads Wiki — Getting Started',
+        author: 'Bogleheads Community',
         description:
-          'Visual history of the index from 1950 to today. The long-term trend is UP.',
-        url: 'https://www.investopedia.com/terms/s/sp500.asp',
+          "The index fund community's bible. Free, comprehensive, and written by passionate investors who follow Jack Bogle's philosophy.",
+        url: 'https://www.bogleheads.org/wiki/Getting_started',
         emoji: '📰',
       },
     ],
@@ -253,98 +168,192 @@ export const zones: Zone[] = [
       {
         question: 'What is an index fund?',
         options: [
-          'A fund that only buys tech stocks',
-          'A fund that tracks a market index (like S&P 500)',
-          'A savings account with higher interest',
-          'A fund managed by Warren Buffett',
+          'A fund managed by top Wall Street traders',
+          'A fund that tracks a market index like the S&P 500',
+          'A government savings bond',
+          'A high-risk cryptocurrency fund',
         ],
       },
       {
         question:
-          'Why does Warren Buffett recommend index funds for most people?',
+          'What percentage of professional fund managers fail to beat the S&P 500 over 15 years?',
         options: [
-          'They are risk-free',
-          'They beat most professional fund managers over time',
-          'They pay monthly dividends',
-          'They are the cheapest stocks',
+          'About 50%',
+          'Over 90%',
+          'Around 25%',
+          'Less than 10%',
         ],
       },
       {
-        question: 'What is diversification?',
+        question: 'What is an ETF?',
         options: [
-          'Buying only one stock you believe in',
-          'Spreading your investments across many assets to reduce risk',
-          'Investing in foreign currencies',
-          'Changing your investments daily',
+          'A type of savings account',
+          'An exchange-traded fund you can buy and sell like a stock',
+          'A bond issued by the government',
+          'An exclusive fund for wealthy investors',
         ],
       },
       {
         question:
-          'In The Big Short, what lesson should investors learn?',
+          'You want to invest $500/month with minimal effort. Best option?',
         options: [
-          'Always trust the banks',
-          "Understand what you're investing in",
-          'Real estate always goes up',
-          'Ignore warning signs',
+          'Pick individual stocks based on news',
+          'A low-cost S&P 500 index fund with automatic contributions',
+          'Keep it in a savings account until the market dips',
+          'Buy cryptocurrency monthly',
+        ],
+      },
+      {
+        question:
+          'Warren Buffett wagered that an S&P 500 index fund would beat hedge funds over 10 years. What happened?',
+        options: [
+          'The hedge funds won easily',
+          'The index fund won decisively',
+          'It was a tie',
+          'The bet was cancelled',
         ],
       },
     ],
     keyTakeaway:
-      "Index funds are Eleven's shield — they protect you from the monsters of stock picking. You don't need to be a genius. You need to be consistent.",
+      "Index funds are the single most reliable way to build wealth. Don't try to outsmart the market — own the market.",
+  },
+  {
+    id: 3,
+    slug: 'reits',
+    name: 'Castle Byers',
+    subtitle: 'REITs & Real Estate Investing',
+    icon: '🏰',
+    hawkinsLocation: 'Castle Byers',
+    color: '#00e5ff',
+    description:
+      "You don't need $500,000 to invest in real estate. REITs (Real Estate Investment Trusts) let you own shopping malls, apartments, data centers, and hospitals for the price of a single share. They're legally required to pay 90% of income as dividends.",
+    resources: [
+      {
+        type: 'book',
+        title: 'The Intelligent REIT Investor',
+        author: 'Stephanie Krewson-Kelly & R. Brad Thomas',
+        description:
+          'The definitive guide to REIT investing. Covers all REIT types, valuation methods, and portfolio strategies.',
+        emoji: '📖',
+      },
+      {
+        type: 'podcast',
+        title: 'BiggerPockets Real Estate',
+        author: 'BiggerPockets',
+        description:
+          'The largest real estate investing community. Covers REITs alongside physical property investing.',
+        url: 'https://www.biggerpockets.com/podcast',
+        emoji: '🎧',
+      },
+      {
+        type: 'article',
+        title: "Nareit — What's a REIT?",
+        author: 'Nareit',
+        description:
+          'The official REIT industry resource. Clear beginner guides straight from the trade association.',
+        url: 'https://www.reit.com/what-reit',
+        emoji: '📰',
+      },
+    ],
+    quiz: [
+      {
+        question: 'What is a REIT?',
+        options: [
+          'A real estate agency',
+          'A company that owns income-producing real estate and trades like a stock',
+          'A government housing program',
+          'A type of mortgage',
+        ],
+      },
+      {
+        question:
+          'What percentage of taxable income must REITs distribute as dividends?',
+        options: [
+          'At least 50%',
+          'At least 90%',
+          'At least 75%',
+          'There is no requirement',
+        ],
+      },
+      {
+        question: 'Which of these is NOT a type of REIT?',
+        options: [
+          'Data Center REIT',
+          'Cryptocurrency REIT',
+          'Healthcare REIT',
+          'Residential REIT',
+        ],
+      },
+      {
+        question:
+          'A REIT owns 50 apartment buildings generating $10M/year in profit. How much must it pay as dividends?',
+        options: [
+          '$5M',
+          'At least $9M',
+          '$10M exactly',
+          'Whatever the CEO decides',
+        ],
+      },
+    ],
+    keyTakeaway:
+      "REITs give you real estate exposure with stock market liquidity. They're required to distribute most of their income — making them a powerful income tool.",
   },
   {
     id: 4,
     slug: 'financial-statements',
     name: 'The Lab Files',
-    subtitle: "Reading a company's secrets",
+    subtitle: 'Reading Financial Statements',
     icon: '📋',
     hawkinsLocation: 'Hawkins National Laboratory',
     color: '#76ff03',
     description:
-      "Every company has secret files — they're called financial statements. Like Hopper breaking into the Lab, you're going to learn to read what companies don't want you to miss.",
+      "Every public company publishes three key reports: income statement (are they making money?), balance sheet (what do they own vs owe?), and cash flow statement (is real cash coming in?). Like Hopper breaking into the Lab, you're going to learn to read what companies don't want you to miss.",
     resources: [
       {
-        type: 'book',
-        title: 'Reading Financial Statements',
+        type: 'movie',
+        title: 'Khan Academy — Financial Statements',
+        author: 'Khan Academy',
         description:
-          'Your paper copy! Perfect for beginners. Revenue, profit, balance sheet, cash flow — decoded.',
+          'Free, visual, step-by-step lessons on income statements, balance sheets, and cash flow. Pause and replay as needed.',
+        url: 'https://www.khanacademy.org/economics-finance-domain/core-finance/accounting-and-financial-stateme',
+        emoji: '🎬',
+      },
+      {
+        type: 'book',
+        title: 'Financial Statements',
+        author: 'Thomas Ittelson',
+        description:
+          'Illustrated guide designed for non-accountants. Makes balance sheets and income statements actually understandable.',
         emoji: '📖',
       },
       {
         type: 'article',
-        title: 'Khan Academy: Income Statements',
-        author: 'Khan Academy',
+        title: 'SEC — How to Read a 10-K',
+        author: 'U.S. Securities and Exchange Commission',
         description:
-          'Free video lessons. Visual, step-by-step, pause and replay.',
-        url: 'https://www.khanacademy.org/economics-finance-domain',
+          'Straight from the regulator. The official guide to understanding annual reports that public companies must file.',
+        url: 'https://www.sec.gov/oiea/Article/edgarguide.html',
         emoji: '📰',
-      },
-      {
-        type: 'interactive',
-        title: "Read Apple's Income Statement",
-        description:
-          'Interactive exercise: identify revenue, net income, and profit margin from a real Apple report.',
-        emoji: '🔮',
       },
     ],
     quiz: [
       {
-        question: 'What does "revenue" mean?',
+        question: 'What does revenue mean?',
         options: [
-          "The company's profit",
+          "The company's profit after expenses",
           'Total money earned from sales before expenses',
-          'Money in the bank',
-          'Stock price × shares',
+          "Money in the company's bank account",
+          'Stock price multiplied by shares outstanding',
         ],
       },
       {
         question:
-          'What is the difference between revenue and profit?',
+          'A company has $50M revenue and $60M in expenses. What is their net income?',
         options: [
-          "They're the same thing",
-          "Revenue is total sales; profit is what's left after all costs",
-          'Profit is always bigger than revenue',
-          'Revenue only counts cash payments',
+          '$50M profit',
+          '-$10M — a net loss',
+          '$110M combined',
+          'Cannot be determined',
         ],
       },
       {
@@ -352,68 +361,71 @@ export const zones: Zone[] = [
         options: [
           "Only the company's debts",
           'What a company owns (assets) vs what it owes (liabilities)',
-          "The CEO's salary",
+          "The CEO's compensation",
           'Future sales predictions',
         ],
       },
       {
-        question: 'Why is cash flow important?',
+        question:
+          'Company X reports $20M profit but negative $5M cash flow. Should you be concerned?',
         options: [
-          'It shows the stock price',
-          'It shows actual money moving in and out — a company can be "profitable" but run out of cash',
-          "It's not important for investors",
-          'It only matters for banks',
+          'No — profit is all that matters',
+          'Yes — profit without cash flow can mean accounting tricks or unsustainable operations',
+          'No — cash flow is irrelevant',
+          'Only if the stock price is dropping',
+        ],
+      },
+      {
+        question: 'Why is free cash flow important?',
+        options: [
+          'It shows the stock price direction',
+          "It shows actual cash generated after all expenses — the real money a company can use",
+          "It's only important for banks",
+          'It measures employee productivity',
         ],
       },
     ],
     keyTakeaway:
-      "Financial statements are a company's lab files. Revenue, profit, balance sheet, cash flow — now you can read them like Hopper reads classified documents.",
+      'Revenue, profit, assets, liabilities, and cash flow — these five numbers tell you 80% of what you need to know about any company.',
   },
   {
     id: 5,
-    slug: 'research-companies',
+    slug: 'stock-picking',
     name: 'The Party Investigates',
-    subtitle: 'Research real S&P 500 companies',
+    subtitle: 'Researching & Picking Stocks',
     icon: '🔍',
     hawkinsLocation: "Mike's Basement",
     color: '#ffab00',
     description:
-      "Like the Party gathering in Mike's basement to plan their next move, you'll research real companies. Pick 3 that YOU know and love, and investigate them.",
+      "Like the Party gathering in Mike's basement to plan their next move, you'll research real companies. Focus on businesses you understand. Look at revenue growth, profit margins, competitive advantages (moats), and whether the price makes sense.",
     resources: [
       {
         type: 'book',
         title: 'One Up on Wall Street',
         author: 'Peter Lynch',
         description:
-          '"Invest in what you know." You use Apple? Research Apple. You drink Starbucks? Research Starbucks.',
+          '"Invest in what you know." The most practical stock-picking book ever written, by the legendary Fidelity fund manager.',
         emoji: '📖',
       },
       {
-        type: 'interactive',
-        title: 'Company Research Cards',
+        type: 'movie',
+        title: 'Margin Call',
+        author: '2011 Film',
         description:
-          'Pick 3 companies from a curated list and fill in: What do they sell? Is revenue growing? Would you invest?',
-        emoji: '🔮',
+          'The institutional side of markets — shows how Wall Street operates during a crisis. Stellar cast, terrifyingly realistic.',
+        emoji: '🎬',
       },
       {
         type: 'podcast',
-        title: 'Investing for Beginners: How to Research a Stock',
-        author: 'einvestingforbeginners.com',
+        title: 'InvestED',
+        author: 'Phil Town',
         description:
-          'Step-by-step walkthrough of researching a real company.',
+          'Value investing explained simply, with real examples. Phil Town breaks down how to evaluate companies like Buffett and Munger.',
+        url: 'https://www.ruleoneinvesting.com/podcast/',
         emoji: '🎧',
       },
     ],
     quiz: [
-      {
-        question: 'Peter Lynch said you should...',
-        options: [
-          'Only buy tech stocks',
-          'Invest in what you know and understand',
-          'Follow what celebrities invest in',
-          'Buy the cheapest stocks',
-        ],
-      },
       {
         question: 'What is a P/E ratio?',
         options: [
@@ -424,145 +436,215 @@ export const zones: Zone[] = [
         ],
       },
       {
-        question:
-          "When researching a company, what's the MOST important trend?",
+        question: "Peter Lynch's core investing advice:",
         options: [
-          'Stock price this week',
-          'Revenue and profit growth over several years',
-          'Number of employees',
-          'How many ads they run',
+          'Follow what celebrities invest in',
+          'Invest in what you know and understand',
+          'Buy the cheapest stocks available',
+          'Only invest in tech companies',
+        ],
+      },
+      {
+        question:
+          'Company A: P/E of 15, revenue growing 20%/year. Company B: P/E of 50, revenue growing 5%/year. Which is likely a better value?',
+        options: [
+          'Company B — higher P/E means better company',
+          'Company A — cheaper relative to its growth rate',
+          "They're equal in value",
+          'Cannot compare without knowing the industry',
+        ],
+      },
+      {
+        question: 'What is a "moat" in investing?',
+        options: [
+          'A physical barrier around a stock exchange',
+          'A competitive advantage that protects a company from rivals',
+          'A type of stock option',
+          'A legal restriction on selling shares',
+        ],
+      },
+      {
+        question:
+          "You love a company's product but their revenue has declined 3 years straight. Should you invest?",
+        options: [
+          'Yes — great products always recover',
+          "No — loving the product isn't enough, the financials must support the investment",
+          'Yes — declining revenue means the stock is cheap',
+          'Only if the CEO is well-known',
         ],
       },
     ],
     keyTakeaway:
-      "Research = confidence. Like the Party gathering clues in Mike's basement, you can investigate any company. You don't need to be a Wall Street analyst.",
+      "Research = confidence. You don't need to be a Wall Street analyst. Start with companies you use, read their financials, and ask: is this a good business at a fair price?",
   },
   {
     id: 6,
-    slug: 'practice-arena',
-    name: 'The Arcade Challenge',
-    subtitle: 'Practice with virtual money',
-    icon: '🕹️',
-    hawkinsLocation: 'The Palace Arcade',
+    slug: 'dividends',
+    name: 'The Snowball Effect',
+    subtitle: 'Dividends & Income Investing',
+    icon: '❄️',
+    hawkinsLocation: 'The Snow Ball Dance',
     color: '#ff6d00',
     description:
-      'Before you play with real money, practice at the arcade. $10,000 in virtual dollars. Build a portfolio. Track it. Learn from mistakes when they cost nothing.',
+      "Like a snowball rolling downhill, dividends compound when reinvested. Some companies have paid and increased dividends for 25+ years straight (Dividend Aristocrats). This isn't passive income hype — it's a proven, boring, powerful strategy.",
     resources: [
       {
-        type: 'interactive',
-        title: 'Paper Trading Simulator',
+        type: 'book',
+        title: 'The Little Book of Big Dividends',
+        author: 'Charles Carlson',
         description:
-          'Get $10,000 virtual dollars. Build a portfolio of 5 stocks + 1 index fund. Track for 2 weeks.',
-        emoji: '🕹️',
+          'Practical guide to selecting dividend stocks. Covers yield, payout ratios, and how to build a dividend portfolio.',
+        emoji: '📖',
       },
       {
-        type: 'movie',
-        title: 'Inside Job',
-        author: 'Documentary',
+        type: 'podcast',
+        title: 'Dividend Cafe',
+        author: 'David Bahnsen',
         description:
-          'Shows the consequences of not understanding risk. Motivation to learn properly.',
-        emoji: '🎬',
+          'Weekly income investing insights from a respected wealth manager. Concise, data-driven, no hype.',
+        url: 'https://thebahnsengroup.com/dividend-cafe/',
+        emoji: '🎧',
       },
       {
         type: 'article',
-        title: 'Investopedia Stock Simulator',
+        title: 'S&P Dividend Aristocrats',
+        author: 'S&P Global',
         description:
-          'Free paper trading platform. Practice without risking real money.',
-        url: 'https://www.investopedia.com/simulator/',
+          'The official list of companies with 25+ consecutive years of dividend increases. Real data, real track records.',
+        url: 'https://www.spglobal.com/spdji/en/indices/dividends-factors/sp-500-dividend-aristocrats/',
         emoji: '📰',
       },
     ],
     quiz: [
       {
-        question: 'What is "paper trading"?',
+        question: 'What is a dividend?',
         options: [
-          'Trading paper stocks',
-          'Practicing with fake money to learn without risk',
-          'Writing stock picks on paper',
-          'A type of bond',
+          'A fee you pay to your broker',
+          "A portion of a company's profits paid regularly to shareholders",
+          'Interest earned on a savings account',
+          'A tax on stock gains',
         ],
       },
       {
-        question: 'Why should you diversify your portfolio?',
+        question: 'What is DRIP?',
         options: [
-          'To make trading more exciting',
-          'To reduce risk — if one investment fails, others protect you',
-          "It's required by law",
-          'To impress your broker',
+          'A stock trading strategy',
+          'Dividend Reinvestment Plan — automatically reinvesting dividends to buy more shares',
+          'A type of market order',
+          'Daily Return Investment Portfolio',
         ],
       },
       {
         question:
-          'After paper trading for 2 weeks, what should you evaluate?',
+          'A company pays $2/share dividend annually. You own 100 shares and reinvest via DRIP at $50/share. After one year you have:',
         options: [
-          'Only whether you made money',
-          'Your decision-making process, emotional reactions, and what you learned',
-          'Whether to quit investing',
-          'How to pick better stocks next time',
+          '100 shares and $200 cash',
+          '104 shares — and those 4 new shares will also earn dividends',
+          '102 shares',
+          "100 shares — DRIP doesn't add shares",
+        ],
+      },
+      {
+        question: 'What makes a company a Dividend Aristocrat?',
+        options: [
+          'Having the highest dividend yield',
+          '25+ consecutive years of increasing their dividend payment',
+          'Being in the S&P 500',
+          'Paying dividends monthly instead of quarterly',
         ],
       },
     ],
     keyTakeaway:
-      "The arcade is where you level up. Practice, fail, learn — when it costs nothing. Then you're ready for the real game.",
+      "Dividend investing isn't sexy, but reinvested dividends account for roughly 40% of total stock market returns historically. The snowball is real.",
   },
   {
     id: 7,
-    slug: 'your-decision',
+    slug: 'portfolio',
     name: 'The Final Battle',
-    subtitle: 'Make your own investment plan',
+    subtitle: 'Building Your Portfolio',
     icon: '⚔️',
     hawkinsLocation: 'Starcourt Mall (The Final Stand)',
     color: '#ffd600',
     description:
-      "You've traveled through all of Hawkins. You've learned the psychology, the basics, the tools. Now it's YOUR turn. No pressure. No rush. Your journey, your rules.",
+      "You've traveled through all of Hawkins. Now build your actual portfolio. Choose a brokerage, decide your allocation (stocks/bonds/REITs), set up automatic contributions, and start. Dollar-cost averaging means you invest the same amount regularly — no timing the market.",
     resources: [
       {
-        type: 'interactive',
-        title: 'Personal Investment Plan Builder',
+        type: 'book',
+        title: "The Bogleheads' Guide to Investing",
+        author: 'Larimore, Lindauer & LeBoeuf',
         description:
-          'Answer 5 questions and get a personalized starting plan. How much to save, where to invest, when to start.',
-        emoji: '📋',
+          'Community-written classic on building a real portfolio. Covers asset allocation, rebalancing, and staying the course.',
+        emoji: '📖',
       },
       {
-        type: 'article',
-        title: 'Everything You Learned',
+        type: 'movie',
+        title: 'Money, Explained',
+        author: 'Netflix',
         description:
-          'One-page cheat sheet of key concepts from all 7 zones.',
-        emoji: '📰',
+          'Practical, no-fluff financial education. Episodes on retirement, credit, and investing — all under 20 minutes.',
+        emoji: '🎬',
+      },
+      {
+        type: 'podcast',
+        title: 'ChooseFI',
+        author: 'ChooseFI',
+        description:
+          'Actionable financial independence content. Community-driven, practical, and focused on real results.',
+        url: 'https://www.choosefi.com/podcast/',
+        emoji: '🎧',
       },
     ],
     quiz: [
       {
-        question: "What's the best time to start investing?",
+        question: 'What is dollar-cost averaging (DCA)?',
         options: [
-          "When you're rich",
-          'When the market is "low"',
-          'Yesterday. The second best time is today.',
-          'After retirement',
+          'Buying stocks only when prices are low',
+          'Investing a fixed amount at regular intervals regardless of market price',
+          'Averaging the price of your stocks daily',
+          'A technique used only by professional traders',
+        ],
+      },
+      {
+        question: 'What is asset allocation?',
+        options: [
+          'Putting all your money in the best-performing stock',
+          'How you divide investments across stocks, bonds, REITs, and other asset classes',
+          'The amount of money you allocate to savings',
+          'A government regulation on investment limits',
         ],
       },
       {
         question:
-          'Which investment strategy is recommended for beginners?',
+          "The market drops 20%. You're investing via DCA. What should you do?",
         options: [
-          'Day trading',
-          'Buying cryptocurrency',
-          'Regular contributions to a diversified index fund',
-          'Following stock tips on social media',
+          'Sell everything to avoid further losses',
+          "Keep investing — you're now buying at lower prices",
+          'Wait until the market recovers to resume',
+          'Switch all investments to bonds',
         ],
       },
       {
         question:
-          "You've completed the Investment Treasure Map! What's the most important thing you learned?",
+          'A simple starter portfolio for a 25-year-old could be:',
         options: [
-          'How to get rich quick',
-          'That investing is only for experts',
-          'That patience, knowledge, and starting early are the keys to financial freedom',
-          'That you need $100,000 to start investing',
+          '100% individual tech stocks',
+          '80% stock index fund, 10% bond index fund, 10% REIT index fund',
+          '100% savings account until age 40',
+          '50% crypto, 50% gold',
+        ],
+      },
+      {
+        question:
+          'What is the most important factor in long-term investment returns?',
+        options: [
+          'Timing the market perfectly',
+          'Time in the market and consistent contributions',
+          'Having a large starting amount',
+          'Picking the right individual stocks',
         ],
       },
     ],
     keyTakeaway:
-      "You survived Hawkins. You defeated the Mind Flayer of bad financial habits. Now go build your future. Friends don't let friends not invest. 💛",
+      "The best portfolio is one you'll stick with. Pick a simple allocation, automate contributions, and don't touch it. Time in the market beats timing the market.",
   },
 ];

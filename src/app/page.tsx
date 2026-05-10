@@ -7,6 +7,7 @@ import { isZoneUnlocked, isZoneCompleted } from '@/lib/progress';
 import Particles from '@/components/Particles';
 import MapPath from '@/components/MapPath';
 import { useAuth } from '@/components/AuthProvider';
+import CurriculumUpdateModal from '@/components/CurriculumUpdateModal';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative">
+      <CurriculumUpdateModal />
       <Particles />
 
       <div className="relative z-10 flex flex-col items-center px-4 py-16 sm:py-24">

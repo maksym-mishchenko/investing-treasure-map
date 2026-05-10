@@ -26,8 +26,23 @@ export async function POST(request: NextRequest) {
 
   const { type, message } = body as { type?: string; message?: string };
 
-  if (typeof type !== "string" || !["liked", "want-more", "completed"].includes(type)) {
+  const validTypes = ["liked", "want-more", "completed", "zone-rating", "completion"];
+  if (typeof type !== "string" || !validTypes.includes(type)) {
     return Response.json({ error: "Invalid feedback type" }, { status: 400 });
+  }
+
+  const { zone, rating } = body as { zone?: string; rating?: string };
+
+  if (type === "zone-rating") {
+    if (typeof zone !== "string" || !["practical", "useful", "meh"].includes(rating ?? "")) {
+      return Response.json({ error: "Invalid zone rating" }, { status: 400 });
+    }
+  }
+
+  if (type === "completion") {
+    if (!["practical", "useful", "meh"].includes(rating ?? "")) {
+      return Response.json({ error: "Invalid completion rating" }, { status: 400 });
+    }
   }
 
   if (message && (typeof message !== "string" || message.length > 500)) {
@@ -41,13 +56,28 @@ export async function POST(request: NextRequest) {
 
   // Send Telegram notification if configured
   if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-    const emoji = type === "liked" ? "❤️" : type === "completed" ? "🏆" : "📬";
-    const text = [
-      `${emoji} *Investing Map Feedback*`,
-      `Type: ${type}`,
-      message ? `Message: ${message}` : "",
-      `_${new Date().toISOString()}_`,
-    ].filter(Boolean).join("\n");
+    const { zone: zoneSlug, rating: ratingValue } = body as { zone?: string; rating?: string };
+    let emoji = type === "liked" ? "❤️" : type === "completed" ? "🏆" : "📬";
+    const lines = [`*Investing Map Feedback*`];
+
+    if (type === "zone-rating") {
+      emoji = ratingValue === "practical" ? "🎯" : ratingValue === "useful" ? "💡" : "😐";
+      lines[0] = `${emoji} *Zone Rating*`;
+      lines.push(`Zone: ${zoneSlug}`);
+      lines.push(`Rating: ${ratingValue}`);
+    } else if (type === "completion") {
+      emoji = "🏆";
+      lines[0] = `${emoji} *Journey Completed!*`;
+      lines.push(`Rating: ${ratingValue}`);
+      if (message) lines.push(`Feedback: ${message}`);
+    } else {
+      lines[0] = `${emoji} ${lines[0]}`;
+      lines.push(`Type: ${type}`);
+      if (message) lines.push(`Message: ${message}`);
+    }
+    lines.push(`_${new Date().toISOString()}_`);
+
+    const text = lines.filter(Boolean).join("\n");
 
     try {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {

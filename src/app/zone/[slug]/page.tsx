@@ -7,6 +7,8 @@ import { zones } from '@/lib/zones';
 import { isZoneUnlocked, isZoneCompleted, completeZone } from '@/lib/progress';
 import Particles from '@/components/Particles';
 import Quiz from '@/components/Quiz';
+import ZoneRating from '@/components/ZoneRating';
+import CompletionModal from '@/components/CompletionModal';
 import { useAuth } from '@/components/AuthProvider';
 
 export default function ZonePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -14,6 +16,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
   const router = useRouter();
   const zone = zones.find((z) => z.slug === slug);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
 
@@ -84,8 +87,25 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             zoneId={zone.id}
             zoneColor={zone.color}
             username={username}
-            onComplete={() => router.push('/')}
+            onComplete={() => setQuizCompleted(true)}
           />
+          {quizCompleted && (
+            <>
+              <div className="max-w-xl mx-auto">
+                <ZoneRating zoneSlug={zone.slug} zoneColor={zone.color} />
+                <div className="text-center mt-6">
+                  <button
+                    onClick={() => router.push('/')}
+                    className="text-xs font-cinzel tracking-widest hover:underline"
+                    style={{ color: zone.color }}
+                  >
+                    ← Back to Map
+                  </button>
+                </div>
+              </div>
+              {zone.id === zones.length && <CompletionModal />}
+            </>
+          )}
         </div>
       </div>
     );
