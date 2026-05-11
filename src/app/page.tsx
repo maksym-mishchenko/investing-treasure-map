@@ -202,6 +202,9 @@ export default function Home() {
             <a href="/roadmap" className="text-[8px] text-gray-800 hover:text-gray-500 underline">
               Roadmap
             </a>
+            <a href="/journal" className="text-[8px] text-gray-800 hover:text-gray-500 underline">
+              Journal
+            </a>
           </div>
           <p className="text-[8px] text-gray-800 mt-2 max-w-sm mx-auto leading-relaxed">
             Not affiliated with or endorsed by Netflix or the creators of Stranger Things.

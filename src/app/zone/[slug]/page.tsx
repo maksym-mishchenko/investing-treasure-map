@@ -13,6 +13,8 @@ import { useAuth } from '@/components/AuthProvider';
 import CompoundInterestCalc from '@/components/calculators/CompoundInterestCalc';
 import DividendCalc from '@/components/calculators/DividendCalc';
 import PortfolioAllocator from '@/components/calculators/PortfolioAllocator';
+import JournalPrompt from '@/components/JournalPrompt';
+import { checkAndAwardBadges } from '@/lib/badge-checker';
 
 export default function ZonePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -90,12 +92,25 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             zoneId={zone.id}
             zoneColor={zone.color}
             username={username}
-            onComplete={() => setQuizCompleted(true)}
+            onComplete={(score, total) => {
+              setQuizCompleted(true);
+              if (user?.authenticated) {
+                checkAndAwardBadges(zone.id, score, total, username).catch(() => {});
+              }
+            }}
           />
           {quizCompleted && (
             <>
               <div className="max-w-xl mx-auto">
                 <ZoneRating zoneSlug={zone.slug} zoneColor={zone.color} />
+                {zone.journalPrompt && (
+                  <JournalPrompt
+                    zoneSlug={zone.slug}
+                    zoneId={zone.id}
+                    zoneColor={zone.color}
+                    journalPrompt={zone.journalPrompt}
+                  />
+                )}
                 <div className="text-center mt-6">
                   <button
                     onClick={() => router.push('/')}

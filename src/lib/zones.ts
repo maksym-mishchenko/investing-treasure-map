@@ -25,6 +25,7 @@ export interface Zone {
   quiz: QuizQuestion[];
   keyTakeaway: string;
   calculator?: 'compound' | 'dividend' | 'portfolio';
+  journalPrompt?: string;
 }
 
 export const zones: Zone[] = [
@@ -119,6 +120,7 @@ export const zones: Zone[] = [
     keyTakeaway:
       "Every year you don't invest, inflation takes a bite. Compound interest is the most powerful force in finance — but only if you start.",
     calculator: 'compound',
+    journalPrompt: "What's one financial habit you want to change?",
   },
   {
     id: 2,
@@ -218,6 +220,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "Index funds are the single most reliable way to build wealth. Don't try to outsmart the market — own the market.",
+    journalPrompt: "Would you invest in an index fund? Why or why not?",
   },
   {
     id: 3,
@@ -299,6 +302,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "REITs give you real estate exposure with stock market liquidity. They're required to distribute most of their income — making them a powerful income tool.",
+    journalPrompt: "Does real estate investing interest you? What type?",
   },
   {
     id: 4,
@@ -389,6 +393,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       'Revenue, profit, assets, liabilities, and cash flow — these five numbers tell you 80% of what you need to know about any company.',
+    journalPrompt: "Pick a company you use daily. What would you look for in their statements?",
   },
   {
     id: 5,
@@ -478,6 +483,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "Research = confidence. You don't need to be a Wall Street analyst. Start with companies you use, read their financials, and ask: is this a good business at a fair price?",
+    journalPrompt: "Name one company you'd research first. Why?",
   },
   {
     id: 6,
@@ -559,6 +565,7 @@ export const zones: Zone[] = [
     keyTakeaway:
       "Dividend investing isn't sexy, but reinvested dividends account for roughly 40% of total stock market returns historically. The snowball is real.",
     calculator: 'dividend',
+    journalPrompt: "Would you prefer dividend income or growth stocks? Why?",
   },
   {
     id: 7,
@@ -650,5 +657,6 @@ export const zones: Zone[] = [
     keyTakeaway:
       "The best portfolio is one you'll stick with. Pick a simple allocation, automate contributions, and don't touch it. Time in the market beats timing the market.",
     calculator: 'portfolio',
+    journalPrompt: "Write your one-sentence investment plan.",
   },
 ];

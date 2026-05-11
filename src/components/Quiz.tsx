@@ -24,7 +24,7 @@ interface QuizProps {
   zoneId: number;
   zoneColor: string;
   username: string;
-  onComplete: () => void;
+  onComplete: (score: number, total: number) => void;
 }
 
 export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username, onComplete }: QuizProps) {
@@ -157,7 +157,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
         {passed ? (
           <div className="text-center">
             <button
-              onClick={onComplete}
+              onClick={() => onComplete(score, total)}
               className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
               style={{
                 backgroundColor: zoneColor,

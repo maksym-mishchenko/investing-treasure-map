@@ -77,17 +77,19 @@ function AuthInner({ children }: { children: React.ReactNode }) {
         <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
           {user ? (
             <>
-              {user.image && (
-                <img
-                  src={user.image}
-                  alt=""
-                  className="w-6 h-6 rounded-full border border-[#ff1744]/30"
-                  referrerPolicy="no-referrer"
-                />
-              )}
-              <span className="text-xs text-gray-500 font-cinzel tracking-widest">
-                {user.displayName}
-              </span>
+              <a href="/profile" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                {user.image && (
+                  <img
+                    src={user.image}
+                    alt=""
+                    className="w-6 h-6 rounded-full border border-[#ff1744]/30"
+                    referrerPolicy="no-referrer"
+                  />
+                )}
+                <span className="text-xs text-gray-500 font-cinzel tracking-widest">
+                  {user.displayName}
+                </span>
+              </a>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
                 className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"

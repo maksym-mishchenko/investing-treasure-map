@@ -26,3 +26,35 @@ export const progress = pgTable(
     userZoneIdx: uniqueIndex("user_zone_idx").on(table.userId, table.zoneId),
   })
 )
+
+export const badges = pgTable(
+  "badges",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id),
+    badgeId: text("badge_id").notNull(),
+    earnedAt: timestamp("earned_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    userBadgeIdx: uniqueIndex("user_badge_idx").on(table.userId, table.badgeId),
+  })
+)
+
+export const journalEntries = pgTable(
+  "journal_entries",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id),
+    zoneId: integer("zone_id").notNull(),
+    content: text("content").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    userZoneJournalIdx: uniqueIndex("user_zone_journal_idx").on(table.userId, table.zoneId),
+  })
+)
