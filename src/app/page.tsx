@@ -201,7 +201,15 @@ export default function Home() {
           <p className="text-xs text-gray-600 font-cinzel tracking-widest">
             &quot;Friends don&apos;t let friends not invest&quot;
           </p>
-          <p className="text-[8px] text-gray-800 mt-4 max-w-sm mx-auto leading-relaxed">
+          <p className="text-[9px] text-gray-700 mt-3">
+            ⚠️ Educational content only — not financial advice. Invest at your own risk.
+          </p>
+          <div className="flex justify-center gap-3 mt-2">
+            <a href="/privacy" className="text-[8px] text-gray-800 hover:text-gray-500 underline">
+              Privacy Policy
+            </a>
+          </div>
+          <p className="text-[8px] text-gray-800 mt-2 max-w-sm mx-auto leading-relaxed">
             Not affiliated with or endorsed by Netflix or the creators of Stranger Things.
             All references are used for educational and entertainment purposes.
           </p>
