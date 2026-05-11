@@ -201,6 +201,10 @@ export default function Home() {
           <p className="text-xs text-gray-600 font-cinzel tracking-widest">
             &quot;Friends don&apos;t let friends not invest&quot;
           </p>
+          <p className="text-[8px] text-gray-800 mt-4 max-w-sm mx-auto leading-relaxed">
+            Not affiliated with or endorsed by Netflix or the creators of Stranger Things.
+            All references are used for educational and entertainment purposes.
+          </p>
         </div>
       </div>
     </div>
