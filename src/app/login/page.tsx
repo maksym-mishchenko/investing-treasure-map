@@ -88,8 +88,12 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-center text-[10px] text-gray-700 mt-8 font-cinzel tracking-widest">
-          &quot;Sign in to save your progress across devices.&quot;
+        <p className="text-center text-[10px] text-gray-700 mt-8 font-cinzel tracking-widest leading-relaxed">
+          &quot;Signing in saves your progress across devices.
+          <br />
+          But hey — Eleven didn&apos;t need a login to fight the Demogorgon.
+          <br />
+          You do you.&quot; 🧇
         </p>
       </div>
     </div>
