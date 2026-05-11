@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "";
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "";
+const TELEGRAM_THREAD_ID = process.env.TELEGRAM_THREAD_ID ?? "";
 const STATS_API_URL = "https://api.mmishchenko.dev/api/feedback-stats";
 const STATS_API_KEY = process.env.FEEDBACK_STATS_API_KEY ?? "";
 
@@ -95,7 +96,12 @@ export async function POST(request: NextRequest) {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" }),
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text,
+          parse_mode: "Markdown",
+          ...(TELEGRAM_THREAD_ID ? { message_thread_id: Number(TELEGRAM_THREAD_ID) } : {}),
+        }),
       });
     } catch {
       // Non-critical — still return success
