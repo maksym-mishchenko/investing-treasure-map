@@ -39,7 +39,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
 
   const username = user?.username ?? 'guest';
   const admin = user?.role === 'admin';
-  const unlocked = mounted ? isZoneUnlocked(username, zone.id) : zone.id === 1;
+  const unlocked = mounted ? (admin || isZoneUnlocked(username, zone.id)) : zone.id === 1;
   const completed = mounted ? isZoneCompleted(username, zone.id) : false;
 
   if (mounted && !unlocked) {

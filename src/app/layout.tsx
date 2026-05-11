@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
+import AuthProvider from "@/components/AuthProvider";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -29,7 +30,7 @@ export default function RootLayout({
         className={`${cinzel.variable} ${inter.variable} antialiased min-h-screen relative`}
       >
         <div className="fixed inset-0 bg-black/50 pointer-events-none z-[-1]" />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
