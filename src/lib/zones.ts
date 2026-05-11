@@ -24,6 +24,7 @@ export interface Zone {
   resources: Resource[];
   quiz: QuizQuestion[];
   keyTakeaway: string;
+  calculator?: 'compound' | 'dividend' | 'portfolio';
 }
 
 export const zones: Zone[] = [
@@ -117,6 +118,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "Every year you don't invest, inflation takes a bite. Compound interest is the most powerful force in finance — but only if you start.",
+    calculator: 'compound',
   },
   {
     id: 2,
@@ -556,6 +558,7 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "Dividend investing isn't sexy, but reinvested dividends account for roughly 40% of total stock market returns historically. The snowball is real.",
+    calculator: 'dividend',
   },
   {
     id: 7,
@@ -646,5 +649,6 @@ export const zones: Zone[] = [
     ],
     keyTakeaway:
       "The best portfolio is one you'll stick with. Pick a simple allocation, automate contributions, and don't touch it. Time in the market beats timing the market.",
+    calculator: 'portfolio',
   },
 ];

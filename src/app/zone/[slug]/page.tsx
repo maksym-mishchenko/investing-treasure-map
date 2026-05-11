@@ -10,6 +10,9 @@ import Quiz from '@/components/Quiz';
 import ZoneRating from '@/components/ZoneRating';
 import CompletionModal from '@/components/CompletionModal';
 import { useAuth } from '@/components/AuthProvider';
+import CompoundInterestCalc from '@/components/calculators/CompoundInterestCalc';
+import DividendCalc from '@/components/calculators/DividendCalc';
+import PortfolioAllocator from '@/components/calculators/PortfolioAllocator';
 
 export default function ZonePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -194,6 +197,11 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             ))}
           </div>
         </div>
+
+        {/* Calculator */}
+        {zone.calculator === 'compound' && <CompoundInterestCalc />}
+        {zone.calculator === 'dividend' && <DividendCalc />}
+        {zone.calculator === 'portfolio' && <PortfolioAllocator />}
 
         <div
           className="rounded-lg border p-5 mb-10"

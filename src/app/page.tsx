@@ -9,15 +9,14 @@ import MapPath from '@/components/MapPath';
 import { useAuth } from '@/components/AuthProvider';
 import CurriculumUpdateModal from '@/components/CurriculumUpdateModal';
 import FeedbackForm from '@/components/FeedbackForm';
+import CommunityStats from '@/components/CommunityStats';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [stats, setStats] = useState<{ liked: number; 'want-more': number; completed: number; total: number } | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
-    fetch('/api/feedback/stats').then(r => r.json()).then(setStats).catch(() => {});
   }, []);
 
   const username = user?.username ?? 'guest';
@@ -186,15 +185,7 @@ export default function Home() {
         {mounted && <FeedbackForm />}
 
         {/* Community Stats */}
-        {mounted && stats && stats.total > 0 && (
-          <div className="mt-6 w-full max-w-md text-center">
-            <div className="flex justify-center gap-6 text-[10px] font-cinzel tracking-widest text-gray-500">
-              {stats.liked > 0 && <span>❤️ {stats.liked} liked</span>}
-              {stats.completed > 0 && <span>🏆 {stats.completed} finished</span>}
-              {stats['want-more'] > 0 && <span>📬 {stats['want-more']} want more</span>}
-            </div>
-          </div>
-        )}
+        {mounted && <CommunityStats />}
 
         {/* Footer */}
         <div className="mt-16 text-center">
@@ -207,6 +198,9 @@ export default function Home() {
           <div className="flex justify-center gap-3 mt-2">
             <a href="/privacy" className="text-[8px] text-gray-800 hover:text-gray-500 underline">
               Privacy Policy
+            </a>
+            <a href="/roadmap" className="text-[8px] text-gray-800 hover:text-gray-500 underline">
+              Roadmap
             </a>
           </div>
           <p className="text-[8px] text-gray-800 mt-2 max-w-sm mx-auto leading-relaxed">
