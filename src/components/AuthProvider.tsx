@@ -73,26 +73,38 @@ function AuthInner({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ user, loading, isGuest, refresh: async () => {} }}>
-      {pathname !== '/login' && user && (
+      {pathname !== '/login' && (
         <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
-          {user.image && (
-            <img
-              src={user.image}
-              alt=""
-              className="w-6 h-6 rounded-full border border-[#ff1744]/30"
-              referrerPolicy="no-referrer"
-            />
+          {user ? (
+            <>
+              {user.image && (
+                <img
+                  src={user.image}
+                  alt=""
+                  className="w-6 h-6 rounded-full border border-[#ff1744]/30"
+                  referrerPolicy="no-referrer"
+                />
+              )}
+              <span className="text-xs text-gray-500 font-cinzel tracking-widest">
+                {user.displayName}
+              </span>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+                style={{ color: 'rgba(255,23,68,0.6)' }}
+              >
+                Exit Hawkins
+              </button>
+            </>
+          ) : (
+            <a
+              href="/login"
+              className="text-[10px] font-cinzel tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
+              style={{ color: 'rgba(0,229,255,0.6)' }}
+            >
+              Sign In
+            </a>
           )}
-          <span className="text-xs text-gray-500 font-cinzel tracking-widest">
-            {user.displayName}
-          </span>
-          <button
-            onClick={() => signOut({ callbackUrl: '/login' })}
-            className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
-            style={{ color: 'rgba(255,23,68,0.6)' }}
-          >
-            Exit Hawkins
-          </button>
         </div>
       )}
       {children}
