@@ -7,20 +7,10 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
-    version: "v2.2",
+    version: "v2.3",
     date: "Coming Soon",
     status: "planned",
     items: [
-      {
-        emoji: "🏆",
-        text: "Achievements & Badges — earn 10 badges as you learn",
-        done: false,
-      },
-      {
-        emoji: "📝",
-        text: "Investment Journal — reflect on what you learned",
-        done: false,
-      },
       {
         emoji: "📊",
         text: "Live Stock Ticker — real market data in zones",
@@ -29,9 +19,31 @@ export const changelog: ChangelogEntry[] = [
     ],
   },
   {
-    version: "v2.1",
+    version: "v2.2",
     date: "May 2026",
     status: "current",
+    items: [
+      {
+        emoji: "🏆",
+        text: "Achievements & Badges — earn 10 badges as you learn",
+        done: true,
+      },
+      {
+        emoji: "📝",
+        text: "Investment Journal — reflect on what you learned",
+        done: true,
+      },
+      {
+        emoji: "👤",
+        text: "Profile page — view your badges and stats",
+        done: true,
+      },
+    ],
+  },
+  {
+    version: "v2.1",
+    date: "May 2026",
+    status: "shipped",
     items: [
       {
         emoji: "🧮",
