@@ -40,7 +40,7 @@ export default function Home() {
         </h1>
         {user && (
           <p className="text-xs font-cinzel tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.6)' }}>
-            Welcome, {user.displayName}
+            Welcome, {user.displayName.split(' ')[0]}
           </p>
         )}
         <p className="text-gray-400 text-center text-sm sm:text-base max-w-lg mb-4">
