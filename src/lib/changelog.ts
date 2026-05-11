@@ -8,20 +8,20 @@ export interface ChangelogEntry {
 export const changelog: ChangelogEntry[] = [
   {
     version: "v2.3",
-    date: "Coming Soon",
-    status: "planned",
+    date: "May 2026",
+    status: "current",
     items: [
       {
         emoji: "📊",
         text: "Live Stock Ticker — real market data in zones",
-        done: false,
+        done: true,
       },
     ],
   },
   {
     version: "v2.2",
     date: "May 2026",
-    status: "current",
+    status: "shipped",
     items: [
       {
         emoji: "🏆",

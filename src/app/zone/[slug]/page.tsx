@@ -10,6 +10,7 @@ import Quiz from '@/components/Quiz';
 import ZoneRating from '@/components/ZoneRating';
 import CompletionModal from '@/components/CompletionModal';
 import { useAuth } from '@/components/AuthProvider';
+import StockTicker from '@/components/StockTicker';
 import CompoundInterestCalc from '@/components/calculators/CompoundInterestCalc';
 import DividendCalc from '@/components/calculators/DividendCalc';
 import PortfolioAllocator from '@/components/calculators/PortfolioAllocator';
@@ -194,6 +195,10 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           </div>
           <p className="text-gray-300 leading-relaxed">{zone.description}</p>
         </div>
+
+        {zone.tickerSymbols && zone.tickerSymbols.length > 0 && (
+          <StockTicker symbols={zone.tickerSymbols} zoneColor={zone.color} />
+        )}
 
         <div className="mb-12">
           <h2 className="font-cinzel text-sm tracking-widest text-gray-400 mb-4">
