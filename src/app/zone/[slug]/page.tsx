@@ -111,14 +111,40 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                     journalPrompt={zone.journalPrompt}
                   />
                 )}
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => router.push('/')}
-                    className="text-xs font-cinzel tracking-widest hover:underline"
-                    style={{ color: zone.color }}
-                  >
-                    ← Back to Map
-                  </button>
+                <div className="text-center mt-6 space-y-3">
+                  {zone.id < zones.length ? (
+                    <button
+                      onClick={() => router.push(`/zone/${zones[zone.id].slug}`)}
+                      className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+                      style={{
+                        backgroundColor: zones[zone.id].color,
+                        color: '#0a0a0a',
+                        boxShadow: `0 0 20px ${zones[zone.id].color}40`,
+                      }}
+                    >
+                      Next Zone: {zones[zone.id].name} →
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => router.push('/')}
+                      className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+                      style={{
+                        backgroundColor: '#00e5ff',
+                        color: '#0a0a0a',
+                        boxShadow: '0 0 20px rgba(0,229,255,0.4)',
+                      }}
+                    >
+                      🏆 View Your Map
+                    </button>
+                  )}
+                  <div>
+                    <button
+                      onClick={() => router.push('/')}
+                      className="text-xs font-cinzel tracking-widest text-gray-600 hover:text-gray-400"
+                    >
+                      ← Back to Map
+                    </button>
+                  </div>
                 </div>
               </div>
               {zone.id === zones.length && <CompletionModal />}
