@@ -10,7 +10,7 @@
   --color-st-orange: #ff6d00;
   --color-st-yellow: #ffd600;
   
-  --font-neon: var(--font-neon), sans-serif;
+  --font-heading: var(--font-neon), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .font-neon {
-  font-family: var(--font-neon);
+  font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
