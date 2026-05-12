@@ -93,8 +93,8 @@ function AuthInner({ children }: { children: React.ReactNode }) {
               </a>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-[10px] font-neon tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744] whitespace-nowrap"
-                style={{ color: 'rgba(255,23,68,0.6)' }}
+                className="text-[10px] font-neon tracking-widest px-3 py-1.5 rounded transition-all hover:opacity-80 whitespace-nowrap"
+                style={{ backgroundColor: '#ff1744', color: '#000000' }}
               >
                 Exit
               </button>
@@ -102,8 +102,8 @@ function AuthInner({ children }: { children: React.ReactNode }) {
           ) : (
             <a
               href="/login"
-              className="text-[10px] font-neon tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff] whitespace-nowrap"
-              style={{ color: 'rgba(0,229,255,0.6)' }}
+              className="text-[10px] font-neon tracking-widest px-3 py-1.5 rounded transition-all hover:opacity-80 whitespace-nowrap"
+              style={{ backgroundColor: '#00e5ff', color: '#000000' }}
             >
               Sign In
             </a>
