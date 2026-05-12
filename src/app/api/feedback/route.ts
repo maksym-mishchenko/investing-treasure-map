@@ -4,7 +4,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "";
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "";
 const TELEGRAM_THREAD_ID = process.env.TELEGRAM_THREAD_ID ?? "";
 const STATS_API_URL = "https://api.mmishchenko.dev/api/feedback-stats";
-const STATS_API_KEY = process.env.FEEDBACK_STATS_API_KEY ?? "";
+const STATS_API_KEY = process.env.STATS_API_KEY ?? "";
 
 // Rate limit: 1 feedback per IP per 10 minutes
 const recentFeedback = new Map<string, number>();
@@ -52,9 +52,6 @@ export async function POST(request: NextRequest) {
 
   recentFeedback.set(ip, now);
 
-  // Log for Vercel logs
-  console.log(`[FEEDBACK] type=${type} message=${message ?? ""} ip=${ip} time=${new Date().toISOString()}`);
-
   // Send Telegram notification if configured
   if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
     const { zone: zoneSlug, rating: ratingValue } = body as { zone?: string; rating?: string };
@@ -93,7 +90,7 @@ export async function POST(request: NextRequest) {
     const text = lines.filter(Boolean).join("\n");
 
     try {
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      const tgRes = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -103,21 +100,27 @@ export async function POST(request: NextRequest) {
           ...(TELEGRAM_THREAD_ID ? { message_thread_id: Number(TELEGRAM_THREAD_ID) } : {}),
         }),
       });
-    } catch {
-      // Non-critical — still return success
+      if (!tgRes.ok) {
+        console.error('[feedback] Telegram send failed:', tgRes.status, await tgRes.text());
+      }
+    } catch (err) {
+      console.error('[feedback] Telegram fetch error:', err);
     }
   }
 
   // Store stats on dashboard
   if (STATS_API_KEY) {
     try {
-      await fetch(STATS_API_URL, {
+      const statsRes = await fetch(STATS_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-api-key": STATS_API_KEY },
         body: JSON.stringify({ type, ip }),
       });
-    } catch {
-      // Non-critical
+      if (!statsRes.ok) {
+        console.error('[feedback] stats API failed:', statsRes.status);
+      }
+    } catch (err) {
+      console.error('[feedback] stats fetch error:', err);
     }
   }
 

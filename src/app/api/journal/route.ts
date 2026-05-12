@@ -3,6 +3,27 @@ import { db } from "@/lib/db"
 import { journalEntries, users } from "@/lib/db/schema"
 import { eq, and } from "drizzle-orm"
 import { randomUUID } from "crypto"
+import type { Session } from "next-auth"
+
+/** Ensures the user row exists, creates it if missing. Returns the user record. */
+async function getOrCreateUser(session: Session) {
+  const email = session.user!.email!
+  const existing = await db.query.users.findFirst({ where: eq(users.email, email) })
+  if (existing) return existing
+
+  const id = randomUUID()
+  const [inserted] = await db
+    .insert(users)
+    .values({
+      id,
+      email,
+      name: session.user!.name ?? null,
+      image: session.user!.image ?? null,
+      role: session.user!.role ?? "user",
+    })
+    .returning()
+  return inserted
+}
 
 export async function GET() {
   const session = await auth()
@@ -43,24 +64,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Content required (max 500 chars)" }, { status: 400 })
   }
 
-  let user = await db.query.users.findFirst({
-    where: eq(users.email, session.user.email),
-  })
-
-  if (!user) {
-    const id = randomUUID()
-    const [inserted] = await db
-      .insert(users)
-      .values({
-        id,
-        email: session.user.email,
-        name: session.user.name ?? null,
-        image: session.user.image ?? null,
-        role: (session.user as Record<string, unknown>).role as string ?? "user",
-      })
-      .returning()
-    user = inserted
-  }
+  const user = await getOrCreateUser(session)
 
   const existing = await db.query.journalEntries.findFirst({
     where: and(
