@@ -8,6 +8,7 @@ import Particles from '@/components/Particles';
 import MapPath from '@/components/MapPath';
 import { useAuth } from '@/components/AuthProvider';
 import CurriculumUpdateModal from '@/components/CurriculumUpdateModal';
+import WhatsNewModal from '@/components/WhatsNewModal';
 import FeedbackForm from '@/components/FeedbackForm';
 import CommunityStats from '@/components/CommunityStats';
 
@@ -28,6 +29,7 @@ export default function Home() {
   return (
     <div className="min-h-screen relative">
       <CurriculumUpdateModal />
+      <WhatsNewModal />
       <Particles />
 
       <div className="relative z-10 flex flex-col items-center px-4 py-16 sm:py-24">

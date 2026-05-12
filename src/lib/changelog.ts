@@ -7,9 +7,21 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
-    version: "v2.3",
+    version: "v2.4",
     date: "May 2026",
     status: "current",
+    items: [
+      {
+        emoji: "🔤",
+        text: "New heading font (Tilt Neon) — better readability, based on community feedback",
+        done: true,
+      },
+    ],
+  },
+  {
+    version: "v2.3",
+    date: "May 2026",
+    status: "shipped",
     items: [
       {
         emoji: "📊",
