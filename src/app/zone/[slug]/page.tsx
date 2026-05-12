@@ -36,7 +36,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
         <div className="text-center">
           <p className="text-2xl mb-4">🌀 Zone not found</p>
           <Link href="/" className="text-[#ff1744] hover:underline font-neon text-sm tracking-widest">
-            ← Back to Map
+            <span className="font-bold">←</span> Back to Map
           </Link>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           <h2 className="font-neon text-xl mb-2 text-gray-400">Zone Locked</h2>
           <p className="text-sm text-gray-600 mb-6">Complete Zone {zone.id - 1} to unlock this area.</p>
           <Link href="/" className="text-[#ff1744] hover:underline font-neon text-sm tracking-widest">
-            ← Back to Map
+            <span className="font-bold">←</span> Back to Map
           </Link>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
               onClick={() => setShowQuiz(false)}
               className="text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest"
             >
-              ← Back to Zone
+              <span className="font-bold">←</span> Back to Zone
             </button>
             <h2
               className="font-neon text-xl mt-4 tracking-wide"
@@ -124,7 +124,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                         boxShadow: `0 0 20px ${zones[zone.id].color}40`,
                       }}
                     >
-                      Next Zone: {zones[zone.id].name} →
+                      Next Zone: {zones[zone.id].name} <span className="font-bold">→</span>
                     </button>
                   ) : (
                     <button
@@ -144,7 +144,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                       onClick={() => router.push('/')}
                       className="text-xs font-neon tracking-widest text-gray-600 hover:text-gray-400"
                     >
-                      ← Back to Map
+                      <span className="font-bold">←</span> Back to Map
                     </button>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           href="/"
           className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
         >
-          ← Back to Map
+          <span className="font-bold">←</span> Back to Map
         </Link>
 
         {/* pr-24 reserves space for the fixed auth pill on mobile */}
@@ -236,7 +236,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                         className="text-xs mt-2 inline-block hover:underline"
                         style={{ color: zone.color }}
                       >
-                        Visit →
+                        Visit <span className="font-bold">→</span>
                       </a>
                     )}
                   </div>
