@@ -97,7 +97,7 @@ export default function CurriculumUpdateModal() {
         }}
       >
         <span className="text-4xl block mb-4">🔄</span>
-        <h2 className="font-cinzel text-xl tracking-wide mb-3" style={{ color: '#00e5ff' }}>
+        <h2 className="font-neon text-xl tracking-wide mb-3" style={{ color: '#00e5ff' }}>
           Curriculum v2.0
         </h2>
         <p className="text-sm text-gray-400 leading-relaxed mb-6">
@@ -109,7 +109,7 @@ export default function CurriculumUpdateModal() {
         </p>
         <button
           onClick={handleDismiss}
-          className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+          className="px-8 py-3 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105"
           style={{
             backgroundColor: '#00e5ff',
             color: '#0a0a0a',

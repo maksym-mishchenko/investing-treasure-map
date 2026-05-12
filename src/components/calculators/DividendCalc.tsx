@@ -62,7 +62,7 @@ export default function DividendCalc() {
         backgroundColor: 'rgba(255,109,0,0.03)',
       }}
     >
-      <h3 className="font-cinzel text-sm tracking-widest mb-5" style={{ color: '#ff6d00' }}>
+      <h3 className="font-neon text-sm tracking-widest mb-5" style={{ color: '#ff6d00' }}>
         ❄️ Dividend Snowball Calculator
       </h3>
 
@@ -111,7 +111,7 @@ export default function DividendCalc() {
           <span className="text-xs text-gray-400">DRIP (Reinvest Dividends)</span>
           <button
             onClick={() => setDrip(!drip)}
-            className="px-3 py-1 rounded-full text-xs font-cinzel tracking-widest transition-all"
+            className="px-3 py-1 rounded-full text-xs font-neon tracking-widest transition-all"
             style={{
               backgroundColor: drip ? 'rgba(255,109,0,0.2)' : 'rgba(255,255,255,0.05)',
               color: drip ? '#ff6d00' : '#666',
@@ -125,7 +125,7 @@ export default function DividendCalc() {
 
       <div className="mt-6 rounded-lg p-4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>
         <div className="text-center mb-3">
-          <p className="text-[10px] font-cinzel tracking-widest text-gray-500 mb-1">
+          <p className="text-[10px] font-neon tracking-widest text-gray-500 mb-1">
             Portfolio Value ({drip ? 'With DRIP' : 'Without DRIP'})
           </p>
           <p className="text-2xl sm:text-3xl font-bold" style={{ color: '#ff6d00' }}>

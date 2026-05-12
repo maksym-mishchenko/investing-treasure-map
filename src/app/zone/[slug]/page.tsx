@@ -35,7 +35,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-2xl mb-4">🌀 Zone not found</p>
-          <Link href="/" className="text-[#ff1744] hover:underline font-cinzel text-sm tracking-widest">
+          <Link href="/" className="text-[#ff1744] hover:underline font-neon text-sm tracking-widest">
             ← Back to Map
           </Link>
         </div>
@@ -53,9 +53,9 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
           <p className="text-5xl mb-4">🔒</p>
-          <h2 className="font-cinzel text-xl mb-2 text-gray-400">Zone Locked</h2>
+          <h2 className="font-neon text-xl mb-2 text-gray-400">Zone Locked</h2>
           <p className="text-sm text-gray-600 mb-6">Complete Zone {zone.id - 1} to unlock this area.</p>
-          <Link href="/" className="text-[#ff1744] hover:underline font-cinzel text-sm tracking-widest">
+          <Link href="/" className="text-[#ff1744] hover:underline font-neon text-sm tracking-widest">
             ← Back to Map
           </Link>
         </div>
@@ -76,12 +76,12 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           <div className="max-w-xl mx-auto mb-8">
             <button
               onClick={() => setShowQuiz(false)}
-              className="text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest"
+              className="text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest"
             >
               ← Back to Zone
             </button>
             <h2
-              className="font-cinzel text-xl mt-4 tracking-wide"
+              className="font-neon text-xl mt-4 tracking-wide"
               style={{ color: zone.color }}
             >
               {zone.icon} Quiz: {zone.name}
@@ -116,7 +116,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                   {zone.id < zones.length ? (
                     <button
                       onClick={() => router.push(`/zone/${zones[zone.id].slug}`)}
-                      className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+                      className="px-8 py-3 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105"
                       style={{
                         backgroundColor: zones[zone.id].color,
                         color: '#0a0a0a',
@@ -128,7 +128,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                   ) : (
                     <button
                       onClick={() => router.push('/')}
-                      className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+                      className="px-8 py-3 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105"
                       style={{
                         backgroundColor: '#00e5ff',
                         color: '#0a0a0a',
@@ -141,7 +141,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
                   <div>
                     <button
                       onClick={() => router.push('/')}
-                      className="text-xs font-cinzel tracking-widest text-gray-600 hover:text-gray-400"
+                      className="text-xs font-neon tracking-widest text-gray-600 hover:text-gray-400"
                     >
                       ← Back to Map
                     </button>
@@ -163,7 +163,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
       <div className="relative z-10 px-4 py-12 max-w-2xl mx-auto">
         <Link
           href="/"
-          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
+          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
         >
           ← Back to Map
         </Link>
@@ -171,7 +171,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
         <div className="mb-10">
           <div className="flex items-center gap-2 mb-3">
             <span
-              className="text-[10px] font-cinzel tracking-widest"
+              className="text-[10px] font-neon tracking-widest"
               style={{ color: zone.color }}
             >
               Zone {zone.id}
@@ -185,7 +185,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             <span className="text-4xl">{zone.icon}</span>
             <div>
               <h1
-                className="font-cinzel text-2xl sm:text-3xl tracking-wide"
+                className="font-neon text-2xl sm:text-3xl tracking-wide"
                 style={{ color: zone.color }}
               >
                 {zone.name}
@@ -201,7 +201,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
         )}
 
         <div className="mb-12">
-          <h2 className="font-cinzel text-sm tracking-widest text-gray-400 mb-4">
+          <h2 className="font-neon text-sm tracking-widest text-gray-400 mb-4">
             📚 Resources
           </h2>
           <div className="space-y-3">
@@ -256,7 +256,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             backgroundColor: `${zone.color}05`,
           }}
         >
-          <h3 className="font-cinzel text-xs tracking-widest mb-2" style={{ color: zone.color }}>
+          <h3 className="font-neon text-xs tracking-widest mb-2" style={{ color: zone.color }}>
             💡 Key Takeaway
           </h3>
           <p className="text-sm text-gray-300 leading-relaxed">{zone.keyTakeaway}</p>
@@ -265,7 +265,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
         <div className="text-center space-y-3">
           <button
             onClick={() => setShowQuiz(true)}
-            className="px-10 py-4 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105"
+            className="px-10 py-4 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105"
             style={{
               backgroundColor: zone.color,
               color: '#0a0a0a',
@@ -279,7 +279,7 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
             <div>
               <button
                 onClick={handleSkipQuiz}
-                className="px-8 py-3 rounded-xl font-cinzel text-xs tracking-widest transition-all duration-300 hover:scale-105 border"
+                className="px-8 py-3 rounded-xl font-neon text-xs tracking-widest transition-all duration-300 hover:scale-105 border"
                 style={{
                   borderColor: 'rgba(255,23,68,0.4)',
                   color: 'rgba(255,23,68,0.7)',

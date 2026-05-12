@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Cinzel, Inter } from "next/font/google";
+import { Tilt_Neon, Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
+const tiltNeon = Tilt_Neon({
+  variable: "--font-neon",
   subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 const inter = Inter({
@@ -27,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${cinzel.variable} ${inter.variable} antialiased min-h-screen relative`}
+        className={`${tiltNeon.variable} ${inter.variable} antialiased min-h-screen relative`}
       >
         <div className="fixed inset-0 bg-black/50 pointer-events-none z-[-1]" />
         <AuthProvider>{children}</AuthProvider>

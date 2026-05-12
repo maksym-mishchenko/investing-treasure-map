@@ -29,7 +29,7 @@ export default function BadgeCard({ badge, earned, earnedAt }: BadgeCardProps) {
         {badge.icon}
       </div>
       <h3
-        className={`font-cinzel text-xs tracking-widest mb-1 ${
+        className={`font-neon text-xs tracking-widest mb-1 ${
           earned ? 'text-[#00e5ff]' : 'text-gray-600'
         }`}
       >

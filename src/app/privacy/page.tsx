@@ -5,13 +5,13 @@ export default function PrivacyPage() {
     <div className="min-h-screen px-4 py-16 max-w-2xl mx-auto">
       <Link
         href="/"
-        className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
+        className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
       >
         ← Back to Map
       </Link>
 
       <h1
-        className="text-2xl font-cinzel tracking-wide mb-8"
+        className="text-2xl font-neon tracking-wide mb-8"
         style={{ color: '#ff1744' }}
       >
         Privacy Policy

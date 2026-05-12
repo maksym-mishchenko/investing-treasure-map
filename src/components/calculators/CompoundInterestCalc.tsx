@@ -45,7 +45,7 @@ export default function CompoundInterestCalc() {
         backgroundColor: 'rgba(255,23,68,0.03)',
       }}
     >
-      <h3 className="font-cinzel text-sm tracking-widest mb-5" style={{ color: '#ff1744' }}>
+      <h3 className="font-neon text-sm tracking-widest mb-5" style={{ color: '#ff1744' }}>
         💰 Compound Interest Calculator
       </h3>
 
@@ -94,7 +94,7 @@ export default function CompoundInterestCalc() {
 
       <div className="mt-6 rounded-lg p-4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>
         <div className="text-center mb-3">
-          <p className="text-[10px] font-cinzel tracking-widest text-gray-500 mb-1">Final Amount</p>
+          <p className="text-[10px] font-neon tracking-widest text-gray-500 mb-1">Final Amount</p>
           <p className="text-2xl sm:text-3xl font-bold" style={{ color: '#ff1744' }}>
             {formatCurrency(result.balance)}
           </p>

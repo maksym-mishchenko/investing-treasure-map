@@ -36,12 +36,12 @@ export default function LoginPage() {
             🔦
           </div>
           <h1
-            className="text-3xl sm:text-4xl font-cinzel neon-glow mb-2"
+            className="text-3xl sm:text-4xl font-neon neon-glow mb-2"
             style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
           >
             Enter Hawkins
           </h1>
-          <p className="text-xs text-gray-500 font-cinzel tracking-widest">
+          <p className="text-xs text-gray-500 font-neon tracking-widest">
             Identify yourself, traveler
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function LoginPage() {
         <div className="space-y-4">
           <button
             onClick={() => signIn('google', { callbackUrl: '/' })}
-            className="w-full py-4 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3"
+            className="w-full py-4 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3"
             style={{
               backgroundColor: '#ff1744',
               color: '#0a0a0a',
@@ -80,7 +80,7 @@ export default function LoginPage() {
           <div className="text-center">
             <Link
               href="/"
-              className="text-xs font-cinzel tracking-widest transition-all hover:text-[#ff1744]"
+              className="text-xs font-neon tracking-widest transition-all hover:text-[#ff1744]"
               style={{ color: 'rgba(255,23,68,0.5)' }}
             >
               Continue as guest →
@@ -88,7 +88,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-center text-[10px] text-gray-700 mt-8 font-cinzel tracking-widest leading-relaxed">
+        <p className="text-center text-[10px] text-gray-700 mt-8 font-neon tracking-widest leading-relaxed">
           &quot;Signing in saves your progress across devices.
           <br />
           But hey — Eleven didn&apos;t need a login to fight the Demogorgon.

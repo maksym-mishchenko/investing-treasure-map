@@ -32,7 +32,7 @@ export default function ZoneRating({ zoneSlug, zoneColor }: ZoneRatingProps) {
 
   if (sent) {
     return (
-      <p className="text-center text-xs font-cinzel tracking-widest mt-6" style={{ color: zoneColor }}>
+      <p className="text-center text-xs font-neon tracking-widest mt-6" style={{ color: zoneColor }}>
         ✓ Thanks for your feedback!
       </p>
     );
@@ -40,14 +40,14 @@ export default function ZoneRating({ zoneSlug, zoneColor }: ZoneRatingProps) {
 
   return (
     <div className="mt-8 text-center">
-      <p className="text-xs font-cinzel tracking-widest text-gray-400 mb-4">
+      <p className="text-xs font-neon tracking-widest text-gray-400 mb-4">
         Was this zone useful?
       </p>
       <div className="flex justify-center gap-3">
         <button
           onClick={() => handleRate('practical')}
           disabled={loading}
-          className="text-[10px] font-cinzel tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50"
+          className="text-[10px] font-neon tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50"
           style={{ borderColor: `${zoneColor}40`, color: zoneColor }}
         >
           🎯 Practical
@@ -55,7 +55,7 @@ export default function ZoneRating({ zoneSlug, zoneColor }: ZoneRatingProps) {
         <button
           onClick={() => handleRate('useful')}
           disabled={loading}
-          className="text-[10px] font-cinzel tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50"
+          className="text-[10px] font-neon tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50"
           style={{ borderColor: `${zoneColor}40`, color: zoneColor }}
         >
           💡 Useful
@@ -63,7 +63,7 @@ export default function ZoneRating({ zoneSlug, zoneColor }: ZoneRatingProps) {
         <button
           onClick={() => handleRate('meh')}
           disabled={loading}
-          className="text-[10px] font-cinzel tracking-widest border border-gray-700 px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50 text-gray-500"
+          className="text-[10px] font-neon tracking-widest border border-gray-700 px-4 py-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50 text-gray-500"
         >
           😐 Meh
         </button>

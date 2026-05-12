@@ -35,7 +35,7 @@ export default function FeedbackForm() {
   if (sent) {
     return (
       <div className="mt-12 w-full max-w-md text-center">
-        <p className="text-xs font-cinzel tracking-widest" style={{ color: '#00e5ff' }}>
+        <p className="text-xs font-neon tracking-widest" style={{ color: '#00e5ff' }}>
           ✓ Thanks for your feedback! We read every message.
         </p>
         <button
@@ -54,7 +54,7 @@ export default function FeedbackForm() {
         <div className="text-center">
           <button
             onClick={() => setOpen(true)}
-            className="text-[10px] font-cinzel tracking-widest text-gray-500 hover:text-gray-300 transition-colors border border-gray-800 hover:border-gray-600 px-5 py-2.5 rounded-lg"
+            className="text-[10px] font-neon tracking-widest text-gray-500 hover:text-gray-300 transition-colors border border-gray-800 hover:border-gray-600 px-5 py-2.5 rounded-lg"
           >
             💬 Feedback · Request · Report
           </button>
@@ -65,7 +65,7 @@ export default function FeedbackForm() {
           style={{ borderColor: 'rgba(255,255,255,0.08)', backgroundColor: 'rgba(255,255,255,0.02)' }}
         >
           <div className="flex items-center justify-between mb-4">
-            <p className="text-xs font-cinzel tracking-widest text-gray-400">
+            <p className="text-xs font-neon tracking-widest text-gray-400">
               Talk to us
             </p>
             <button
@@ -81,7 +81,7 @@ export default function FeedbackForm() {
               <button
                 key={t.value}
                 onClick={() => setType(t.value)}
-                className="text-[10px] font-cinzel tracking-widest border px-3 py-1.5 rounded-lg transition-all"
+                className="text-[10px] font-neon tracking-widest border px-3 py-1.5 rounded-lg transition-all"
                 style={{
                   borderColor: type === t.value ? '#00e5ff40' : 'rgba(255,255,255,0.08)',
                   color: type === t.value ? '#00e5ff' : '#666',
@@ -107,7 +107,7 @@ export default function FeedbackForm() {
             <button
               onClick={handleSubmit}
               disabled={!message.trim() || sending}
-              className="px-6 py-2 rounded-lg font-cinzel text-[10px] tracking-widest transition-all hover:scale-105 disabled:opacity-40"
+              className="px-6 py-2 rounded-lg font-neon text-[10px] tracking-widest transition-all hover:scale-105 disabled:opacity-40"
               style={{
                 backgroundColor: '#00e5ff',
                 color: '#0a0a0a',

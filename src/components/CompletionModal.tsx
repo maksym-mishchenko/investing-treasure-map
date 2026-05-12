@@ -50,14 +50,14 @@ export default function CompletionModal() {
         }}
       >
         <span className="text-4xl block mb-4">🏆</span>
-        <h2 className="font-cinzel text-xl tracking-wide mb-2" style={{ color: '#ffd600' }}>
+        <h2 className="font-neon text-xl tracking-wide mb-2" style={{ color: '#ffd600' }}>
           You completed the Investment Treasure Map!
         </h2>
         <p className="text-xs text-gray-500 mb-6">
           You survived Hawkins and learned real investing.
         </p>
 
-        <p className="text-xs font-cinzel tracking-widest text-gray-400 mb-4">
+        <p className="text-xs font-neon tracking-widest text-gray-400 mb-4">
           How was the journey?
         </p>
         <div className="flex justify-center gap-3 mb-6">
@@ -65,7 +65,7 @@ export default function CompletionModal() {
             <button
               key={r}
               onClick={() => setRating(r)}
-              className={`text-[10px] font-cinzel tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 ${
+              className={`text-[10px] font-neon tracking-widest border px-4 py-2 rounded-lg transition-all hover:scale-105 ${
                 rating === r ? 'scale-105' : 'opacity-60'
               }`}
               style={{
@@ -91,14 +91,14 @@ export default function CompletionModal() {
         <div className="flex justify-center gap-3">
           <button
             onClick={handleClose}
-            className="text-xs text-gray-600 hover:text-gray-400 font-cinzel tracking-widest px-4 py-2"
+            className="text-xs text-gray-600 hover:text-gray-400 font-neon tracking-widest px-4 py-2"
           >
             Skip
           </button>
           <button
             onClick={handleSubmit}
             disabled={!rating || sending}
-            className="px-8 py-3 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105 disabled:opacity-40"
+            className="px-8 py-3 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105 disabled:opacity-40"
             style={{
               backgroundColor: '#ffd600',
               color: '#0a0a0a',

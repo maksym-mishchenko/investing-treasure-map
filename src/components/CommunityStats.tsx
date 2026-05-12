@@ -22,7 +22,7 @@ export default function CommunityStats() {
 
   return (
     <div className="mt-6 w-full max-w-md text-center">
-      <div className="flex flex-wrap justify-center gap-4 text-[10px] font-cinzel tracking-widest text-gray-500">
+      <div className="flex flex-wrap justify-center gap-4 text-[10px] font-neon tracking-widest text-gray-500">
         {stats.users > 0 && <span>🎓 {stats.users} investors trained</span>}
         {stats.completions > 0 && <span>📚 {stats.completions} zones completed</span>}
         {stats.topZone && <span>⭐ Most loved: {stats.topZone}</span>}

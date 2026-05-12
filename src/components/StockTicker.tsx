@@ -38,7 +38,7 @@ export default function StockTicker({ symbols, zoneColor }: StockTickerProps) {
   if (loading) {
     return (
       <div className="mb-8 rounded-lg border border-white/10 p-4" style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}>
-        <p className="text-xs text-gray-600 font-cinzel tracking-widest">📊 Loading market data...</p>
+        <p className="text-xs text-gray-600 font-neon tracking-widest">📊 Loading market data...</p>
       </div>
     )
   }
@@ -47,7 +47,7 @@ export default function StockTicker({ symbols, zoneColor }: StockTickerProps) {
 
   return (
     <div className="mb-8">
-      <h2 className="font-cinzel text-sm tracking-widest text-gray-400 mb-3">
+      <h2 className="font-neon text-sm tracking-widest text-gray-400 mb-3">
         📊 Live Market Data
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
