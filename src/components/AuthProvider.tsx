@@ -74,34 +74,35 @@ function AuthInner({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={{ user, loading, isGuest, refresh: async () => {} }}>
       {pathname !== '/login' && (
-        <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
           {user ? (
             <>
-              <a href="/profile" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+              {/* Avatar + name: hide name on mobile to avoid overlapping page headers */}
+              <a href="/profile" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 {user.image && (
                   <img
                     src={user.image}
                     alt=""
-                    className="w-6 h-6 rounded-full border border-[#ff1744]/30"
+                    className="w-6 h-6 rounded-full border border-[#ff1744]/30 flex-shrink-0"
                     referrerPolicy="no-referrer"
                   />
                 )}
-                <span className="text-xs text-gray-500 font-neon tracking-widest">
+                <span className="hidden sm:inline text-xs text-gray-500 font-neon tracking-widest">
                   {user.displayName}
                 </span>
               </a>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-[10px] font-neon tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+                className="text-[10px] font-neon tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744] whitespace-nowrap"
                 style={{ color: 'rgba(255,23,68,0.6)' }}
               >
-                Exit Hawkins
+                Exit
               </button>
             </>
           ) : (
             <a
               href="/login"
-              className="text-[10px] font-neon tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
+              className="text-[10px] font-neon tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff] whitespace-nowrap"
               style={{ color: 'rgba(0,229,255,0.6)' }}
             >
               Sign In

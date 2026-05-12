@@ -73,7 +73,8 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
       <div className="min-h-screen relative">
         <Particles />
         <div className="relative z-10 px-4 py-12">
-          <div className="max-w-xl mx-auto mb-8">
+          {/* pr-24 reserves space for the fixed auth pill on mobile */}
+          <div className="max-w-xl mx-auto mb-8 pr-24 sm:pr-0">
             <button
               onClick={() => setShowQuiz(false)}
               className="text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest"
@@ -168,7 +169,8 @@ export default function ZonePage({ params }: { params: Promise<{ slug: string }>
           ← Back to Map
         </Link>
 
-        <div className="mb-10">
+        {/* pr-24 reserves space for the fixed auth pill on mobile */}
+        <div className="mb-10 pr-24 sm:pr-0">
           <div className="flex items-center gap-2 mb-3">
             <span
               className="text-[10px] font-neon tracking-widest"
