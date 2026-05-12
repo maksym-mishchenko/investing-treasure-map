@@ -43,7 +43,7 @@ export default function ProfilePage() {
   if (loading || !user?.authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="font-cinzel text-sm tracking-widest text-gray-500">Loading...</p>
+        <p className="font-neon text-sm tracking-widest text-gray-500">Loading...</p>
       </div>
     )
   }
@@ -68,7 +68,7 @@ export default function ProfilePage() {
       <div className="relative z-10 px-4 py-12 max-w-2xl mx-auto">
         <Link
           href="/"
-          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
+          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
         >
           ← Back to Map
         </Link>
@@ -85,7 +85,7 @@ export default function ProfilePage() {
             />
           )}
           <h1
-            className="font-cinzel text-2xl tracking-wide neon-glow mb-1"
+            className="font-neon text-2xl tracking-wide neon-glow mb-1"
             style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
           >
             {user.displayName}
@@ -96,23 +96,23 @@ export default function ProfilePage() {
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 mb-10">
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-center">
-            <p className="text-2xl font-cinzel text-[#00e5ff]">{completedCount}</p>
-            <p className="text-[10px] font-cinzel tracking-widest text-gray-500 mt-1">
+            <p className="text-2xl font-neon text-[#00e5ff]">{completedCount}</p>
+            <p className="text-[10px] font-neon tracking-widest text-gray-500 mt-1">
               Zones Completed
             </p>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-center">
-            <p className="text-2xl font-cinzel text-[#ff1744]">
+            <p className="text-2xl font-neon text-[#ff1744]">
               {earnedBadges.length}
             </p>
-            <p className="text-[10px] font-cinzel tracking-widest text-gray-500 mt-1">
+            <p className="text-[10px] font-neon tracking-widest text-gray-500 mt-1">
               Badges Earned
             </p>
           </div>
         </div>
 
         {/* Badges */}
-        <h2 className="font-cinzel text-sm tracking-widest text-gray-400 mb-4">
+        <h2 className="font-neon text-sm tracking-widest text-gray-400 mb-4">
           🏅 Achievements
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10">
@@ -130,14 +130,14 @@ export default function ProfilePage() {
         <div className="flex justify-center gap-4">
           <Link
             href="/journal"
-            className="text-xs font-cinzel tracking-widest border border-[#00e5ff]/30 px-4 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
+            className="text-xs font-neon tracking-widest border border-[#00e5ff]/30 px-4 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
             style={{ color: 'rgba(0,229,255,0.6)' }}
           >
             📝 Journal
           </Link>
           <Link
             href="/"
-            className="text-xs font-cinzel tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+            className="text-xs font-neon tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
             style={{ color: 'rgba(255,23,68,0.6)' }}
           >
             🗺️ Map

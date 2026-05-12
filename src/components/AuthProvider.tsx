@@ -61,7 +61,7 @@ function AuthInner({ children }: { children: React.ReactNode }) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p
-            className="font-cinzel text-sm tracking-widest neon-glow"
+            className="font-neon text-sm tracking-widest neon-glow"
             style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
           >
             Entering Hawkins...
@@ -86,13 +86,13 @@ function AuthInner({ children }: { children: React.ReactNode }) {
                     referrerPolicy="no-referrer"
                   />
                 )}
-                <span className="text-xs text-gray-500 font-cinzel tracking-widest">
+                <span className="text-xs text-gray-500 font-neon tracking-widest">
                   {user.displayName}
                 </span>
               </a>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-[10px] font-cinzel tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+                className="text-[10px] font-neon tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
                 style={{ color: 'rgba(255,23,68,0.6)' }}
               >
                 Exit Hawkins
@@ -101,7 +101,7 @@ function AuthInner({ children }: { children: React.ReactNode }) {
           ) : (
             <a
               href="/login"
-              className="text-[10px] font-cinzel tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
+              className="text-[10px] font-neon tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
               style={{ color: 'rgba(0,229,255,0.6)' }}
             >
               Sign In

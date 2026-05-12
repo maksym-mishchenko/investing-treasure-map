@@ -32,7 +32,7 @@ export default function JournalPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="font-cinzel text-sm tracking-widest text-gray-500">Loading...</p>
+        <p className="font-neon text-sm tracking-widest text-gray-500">Loading...</p>
       </div>
     )
   }
@@ -47,14 +47,14 @@ export default function JournalPage() {
       <div className="relative z-10 px-4 py-12 max-w-2xl mx-auto">
         <Link
           href="/"
-          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
+          className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
         >
           ← Back to Map
         </Link>
 
         <div className="text-center mb-10">
           <h1
-            className="font-cinzel text-2xl sm:text-3xl tracking-wide neon-glow mb-2"
+            className="font-neon text-2xl sm:text-3xl tracking-wide neon-glow mb-2"
             style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
           >
             📝 Your Investment Journal
@@ -70,7 +70,7 @@ export default function JournalPage() {
             <p className="text-gray-400 mb-4">Sign in to view your journal</p>
             <a
               href="/login"
-              className="text-xs font-cinzel tracking-widest border border-[#00e5ff]/30 px-6 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
+              className="text-xs font-neon tracking-widest border border-[#00e5ff]/30 px-6 py-2 rounded-lg transition-all hover:border-[#00e5ff] hover:text-[#00e5ff]"
               style={{ color: 'rgba(0,229,255,0.6)' }}
             >
               Sign In
@@ -91,7 +91,7 @@ export default function JournalPage() {
                 style={{ boxShadow: '0 0 30px rgba(0,229,255,0.1)' }}
               >
                 <p className="text-lg mb-1">🏆</p>
-                <h2 className="font-cinzel text-sm tracking-widest text-[#00e5ff] mb-1">
+                <h2 className="font-neon text-sm tracking-widest text-[#00e5ff] mb-1">
                   Personal Investment Manifesto
                 </h2>
                 <p className="text-[10px] text-gray-400">
@@ -118,7 +118,7 @@ export default function JournalPage() {
                       <span className="text-xl">{zone.icon}</span>
                       <div>
                         <h3
-                          className="font-cinzel text-xs tracking-widest"
+                          className="font-neon text-xs tracking-widest"
                           style={{ color: zone.color }}
                         >
                           Zone {zone.id}: {zone.name}
@@ -141,14 +141,14 @@ export default function JournalPage() {
         <div className="flex justify-center gap-4 mt-10">
           <Link
             href="/profile"
-            className="text-xs font-cinzel tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+            className="text-xs font-neon tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
             style={{ color: 'rgba(255,23,68,0.6)' }}
           >
             🏅 Profile
           </Link>
           <Link
             href="/"
-            className="text-xs font-cinzel tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
+            className="text-xs font-neon tracking-widest border border-[#ff1744]/30 px-4 py-2 rounded-lg transition-all hover:border-[#ff1744] hover:text-[#ff1744]"
             style={{ color: 'rgba(255,23,68,0.6)' }}
           >
             🗺️ Map

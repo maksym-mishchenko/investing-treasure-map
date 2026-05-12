@@ -65,7 +65,7 @@ export default function JournalPrompt({ zoneSlug, zoneId, zoneColor, journalProm
       }}
     >
       <h4
-        className="font-cinzel text-xs tracking-widest mb-3"
+        className="font-neon text-xs tracking-widest mb-3"
         style={{ color: zoneColor }}
       >
         📝 Reflect &amp; Journal
@@ -89,14 +89,14 @@ export default function JournalPrompt({ zoneSlug, zoneId, zoneColor, journalProm
         </span>
         <div className="flex items-center gap-3">
           {saved && (
-            <span className="text-[10px] font-cinzel tracking-widest" style={{ color: zoneColor }}>
+            <span className="text-[10px] font-neon tracking-widest" style={{ color: zoneColor }}>
               ✓ Saved
             </span>
           )}
           <button
             onClick={handleSave}
             disabled={!content.trim() || loading}
-            className="text-[10px] font-cinzel tracking-widest border px-4 py-1.5 rounded-lg transition-all hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="text-[10px] font-neon tracking-widest border px-4 py-1.5 rounded-lg transition-all hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: `${zoneColor}40`, color: zoneColor }}
           >
             {loading ? 'Saving...' : existingEntry ? 'Update Reflection' : 'Save Reflection'}

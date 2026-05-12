@@ -107,7 +107,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
             {passed ? '🎉' : '💀'}
           </div>
           <h2
-            className="text-3xl font-cinzel mb-4"
+            className="text-3xl font-neon mb-4"
             style={{ color: passed ? zoneColor : '#ff1744' }}
           >
             {passed ? 'Zone Completed!' : 'The Upside Down Got You'}
@@ -158,7 +158,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
           <div className="text-center">
             <button
               onClick={() => onComplete(score, total)}
-              className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
+              className="px-8 py-3 rounded-lg font-neon text-sm tracking-widest transition-all"
               style={{
                 backgroundColor: zoneColor,
                 color: '#0a0a0a',
@@ -172,7 +172,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
           <div className="text-center">
             <button
               onClick={handleRetry}
-              className="px-8 py-3 rounded-lg font-cinzel text-sm tracking-widest border transition-all hover:bg-white/5"
+              className="px-8 py-3 rounded-lg font-neon text-sm tracking-widest border transition-all hover:bg-white/5"
               style={{ borderColor: '#ff1744', color: '#ff1744' }}
             >
               Try Again
@@ -187,7 +187,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
     return (
       <div className="max-w-xl mx-auto text-center py-12 px-4">
         <div className="text-5xl mb-6">📋</div>
-        <h2 className="text-2xl font-cinzel mb-4" style={{ color: zoneColor }}>
+        <h2 className="text-2xl font-neon mb-4" style={{ color: zoneColor }}>
           All Questions Answered
         </h2>
         <p className="text-gray-400 mb-8">
@@ -196,7 +196,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className="px-10 py-4 rounded-xl font-cinzel text-sm tracking-widest transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-10 py-4 rounded-xl font-neon text-sm tracking-widest transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
             backgroundColor: zoneColor,
             color: '#0a0a0a',
@@ -212,7 +212,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
   return (
     <div className="max-w-xl mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-6">
-        <span className="text-xs text-gray-500 font-cinzel tracking-widest">
+        <span className="text-xs text-gray-500 font-neon tracking-widest">
           Question {currentIdx + 1} of {shuffledQuestions.length}
         </span>
         <span className="text-xs text-gray-500">
@@ -262,7 +262,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
       {selectedOption !== null && (
         <button
           onClick={handleNext}
-          className="w-full py-3 rounded-lg font-cinzel text-sm tracking-widest transition-all"
+          className="w-full py-3 rounded-lg font-neon text-sm tracking-widest transition-all"
           style={{
             backgroundColor: zoneColor,
             color: '#0a0a0a',

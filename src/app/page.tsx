@@ -8,6 +8,7 @@ import Particles from '@/components/Particles';
 import MapPath from '@/components/MapPath';
 import { useAuth } from '@/components/AuthProvider';
 import CurriculumUpdateModal from '@/components/CurriculumUpdateModal';
+import WhatsNewModal from '@/components/WhatsNewModal';
 import FeedbackForm from '@/components/FeedbackForm';
 import CommunityStats from '@/components/CommunityStats';
 
@@ -28,18 +29,19 @@ export default function Home() {
   return (
     <div className="min-h-screen relative">
       <CurriculumUpdateModal />
+      <WhatsNewModal />
       <Particles />
 
       <div className="relative z-10 flex flex-col items-center px-4 py-16 sm:py-24">
         {/* Title */}
         <h1
-          className="text-3xl sm:text-5xl md:text-6xl font-cinzel text-center mb-3 neon-glow"
+          className="text-3xl sm:text-5xl md:text-6xl font-neon text-center mb-3 neon-glow"
           style={{ '--neon-color': '#ff1744' } as React.CSSProperties}
         >
           {"Investment Treasure Map"}
         </h1>
         {user && (
-          <p className="text-xs font-cinzel tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.6)' }}>
+          <p className="text-xs font-neon tracking-widest mb-2" style={{ color: 'rgba(255,23,68,0.6)' }}>
             Welcome, {user.displayName.split(' ')[0]}
           </p>
         )}
@@ -51,10 +53,10 @@ export default function Home() {
         {mounted && completedCount > 0 && (
           <div className="w-full max-w-md mb-6">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] font-cinzel tracking-widest text-gray-500">
+              <span className="text-[10px] font-neon tracking-widest text-gray-500">
                 Progress
               </span>
-              <span className="text-[10px] font-cinzel tracking-widest" style={{ color: allCompleted ? '#00e5ff' : '#ff1744' }}>
+              <span className="text-[10px] font-neon tracking-widest" style={{ color: allCompleted ? '#00e5ff' : '#ff1744' }}>
                 {completedCount}/{totalZones} zones
               </span>
             </div>
@@ -73,7 +75,7 @@ export default function Home() {
               />
             </div>
             {allCompleted && (
-              <p className="text-center text-[10px] font-cinzel tracking-widest mt-2" style={{ color: '#00e5ff' }}>
+              <p className="text-center text-[10px] font-neon tracking-widest mt-2" style={{ color: '#00e5ff' }}>
                 🏆 Journey Complete — You escaped the Upside Down!
               </p>
             )}
@@ -124,7 +126,7 @@ export default function Home() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <span
-                              className="text-[10px] font-cinzel tracking-widest"
+                              className="text-[10px] font-neon tracking-widest"
                               style={{ color: completed ? '#00e5ff' : zone.color }}
                             >
                               Zone {zone.id}
@@ -134,7 +136,7 @@ export default function Home() {
                             </span>
                           </div>
                           <h3
-                            className="font-cinzel text-sm sm:text-base mb-1 tracking-wide"
+                            className="font-neon text-sm sm:text-base mb-1 tracking-wide"
                             style={{
                               color: completed ? '#00e5ff' : isCurrent ? zone.color : '#ededed',
                             }}
@@ -161,14 +163,14 @@ export default function Home() {
                       <span className="text-3xl grayscale">🔒</span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-cinzel tracking-widest text-gray-600">
+                          <span className="text-[10px] font-neon tracking-widest text-gray-600">
                             Zone {zone.id}
                           </span>
                           <span className="text-[10px] text-gray-700">
                             · {zone.hawkinsLocation}
                           </span>
                         </div>
-                        <h3 className="font-cinzel text-sm sm:text-base mb-1 tracking-wide text-gray-600">
+                        <h3 className="font-neon text-sm sm:text-base mb-1 tracking-wide text-gray-600">
                           {zone.name}
                         </h3>
                         <p className="text-xs text-gray-700">Complete Zone {zone.id - 1} to unlock</p>
@@ -189,7 +191,7 @@ export default function Home() {
 
         {/* Footer */}
         <div className="mt-16 text-center">
-          <p className="text-xs text-gray-600 font-cinzel tracking-widest">
+          <p className="text-xs text-gray-600 font-neon tracking-widest">
             &quot;Friends don&apos;t let friends not invest&quot;
           </p>
           <p className="text-[9px] text-gray-700 mt-3">

@@ -96,7 +96,7 @@ export default function PortfolioAllocator() {
         backgroundColor: 'rgba(255,214,0,0.03)',
       }}
     >
-      <h3 className="font-cinzel text-sm tracking-widest mb-5" style={{ color: '#ffd600' }}>
+      <h3 className="font-neon text-sm tracking-widest mb-5" style={{ color: '#ffd600' }}>
         ⚔️ Portfolio Builder
       </h3>
 
@@ -106,7 +106,7 @@ export default function PortfolioAllocator() {
           <button
             key={p.label}
             onClick={() => setAllocation(p.stocks, p.bonds, p.reits)}
-            className="px-3 py-1.5 rounded-lg text-[10px] font-cinzel tracking-widest transition-all"
+            className="px-3 py-1.5 rounded-lg text-[10px] font-neon tracking-widest transition-all"
             style={{
               backgroundColor:
                 stocks === p.stocks && bonds === p.bonds && reits === p.reits
@@ -199,7 +199,7 @@ export default function PortfolioAllocator() {
         </div>
 
         <div className="mt-4 pt-3 border-t border-white/5">
-          <p className="text-[10px] font-cinzel tracking-widest text-gray-500 mb-2 text-center">
+          <p className="text-[10px] font-neon tracking-widest text-gray-500 mb-2 text-center">
             Estimated 10-Year Range
           </p>
           <div className="grid grid-cols-3 gap-2 text-center text-xs">

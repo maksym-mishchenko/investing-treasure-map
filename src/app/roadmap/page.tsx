@@ -12,13 +12,13 @@ export default function RoadmapPage() {
     <div className="min-h-screen px-4 py-12 max-w-2xl mx-auto">
       <Link
         href="/"
-        className="inline-block text-xs text-gray-500 hover:text-gray-300 font-cinzel tracking-widest mb-8"
+        className="inline-block text-xs text-gray-500 hover:text-gray-300 font-neon tracking-widest mb-8"
       >
         ← Back to Map
       </Link>
 
       <h1
-        className="text-2xl sm:text-3xl font-cinzel tracking-wide mb-2 neon-glow"
+        className="text-2xl sm:text-3xl font-neon tracking-wide mb-2 neon-glow"
         style={{ '--neon-color': '#00e5ff' } as React.CSSProperties}
       >
         📋 Roadmap
@@ -40,11 +40,11 @@ export default function RoadmapPage() {
               }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="font-cinzel text-base tracking-wide" style={{ color: status.color }}>
+                <span className="font-neon text-base tracking-wide" style={{ color: status.color }}>
                   {entry.version}
                 </span>
                 <span
-                  className="text-[10px] px-2 py-0.5 rounded-full font-cinzel tracking-widest"
+                  className="text-[10px] px-2 py-0.5 rounded-full font-neon tracking-widest"
                   style={{
                     backgroundColor: `${status.color}15`,
                     color: status.color,
@@ -72,7 +72,7 @@ export default function RoadmapPage() {
       </div>
 
       <div className="mt-12 text-center">
-        <p className="text-[10px] text-gray-600 font-cinzel tracking-widest">
+        <p className="text-[10px] text-gray-600 font-neon tracking-widest">
           Have an idea?{' '}
           <Link href="/" className="underline hover:text-gray-400">
             Submit feedback on the map
