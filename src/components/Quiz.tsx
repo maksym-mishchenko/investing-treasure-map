@@ -69,20 +69,29 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
       return userAnswers[shuffledIdx];
     });
 
-    const res = await fetch('/api/quiz/check', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ zoneSlug, answers: orderedAnswers }),
-    });
-    const data: ApiResponse = await res.json();
-    setApiResult(data);
+    try {
+      const res = await fetch('/api/quiz/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ zoneSlug, answers: orderedAnswers }),
+      });
+      const data: ApiResponse = await res.json();
+      setApiResult(data);
 
-    if (data.passed) {
-      completeZone(username, zoneId, data.score);
+      if (data.passed) {
+        completeZone(username, zoneId, data.score);
+        // Notify parent immediately so it can take over navigation.
+        // We still render the result screen (apiResult is set above) so the
+        // user sees their score — the parent renders the next-zone button
+        // below us once quizCompleted is true.
+        onComplete(data.score, data.total);
+      }
+    } catch (err) {
+      console.error('[Quiz] submit failed:', err);
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
-  }, [questions, shuffledQuestions, userAnswers, zoneSlug, zoneId]);
+  }, [questions, shuffledQuestions, userAnswers, zoneSlug, zoneId, username, onComplete]);
 
   const handleRetry = useCallback(() => {
     setCurrentIdx(0);
@@ -117,7 +126,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
           </p>
           <p className="text-sm text-gray-500 mb-8">
             {passed
-              ? 'The next zone is now unlocked. Keep going!'
+              ? 'Scroll down to continue your journey.'
               : `You need ${passingCount} correct answers to pass. Review the resources and try again.`}
           </p>
         </div>
@@ -154,21 +163,7 @@ export default function Quiz({ questions, zoneSlug, zoneId, zoneColor, username,
           })}
         </div>
 
-        {passed ? (
-          <div className="text-center">
-            <button
-              onClick={() => onComplete(score, total)}
-              className="px-8 py-3 rounded-lg font-neon text-sm tracking-widest transition-all"
-              style={{
-                backgroundColor: zoneColor,
-                color: '#0a0a0a',
-                boxShadow: `0 0 20px ${zoneColor}80`,
-              }}
-            >
-              Continue Journey →
-            </button>
-          </div>
-        ) : (
+        {!passed && (
           <div className="text-center">
             <button
               onClick={handleRetry}
