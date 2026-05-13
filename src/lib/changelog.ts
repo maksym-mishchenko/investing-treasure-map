@@ -7,6 +7,23 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: "v2.5",
+    date: "May 2026",
+    status: "current",
+    items: [
+      {
+        emoji: "♿",
+        text: "Accessibility pass — buttons now pass WCAG AA contrast, locked zones are clearer",
+        done: true,
+      },
+      {
+        emoji: "📱",
+        text: "Mobile header fixed — Sign In / Exit buttons no longer overlap the page title",
+        done: true,
+      },
+    ],
+  },
+  {
     version: "v2.4",
     date: "May 2026",
     status: "current",

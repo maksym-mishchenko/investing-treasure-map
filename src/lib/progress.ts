@@ -9,10 +9,6 @@ function storageKey(username: string): string {
   return `progress_${username}`;
 }
 
-export function isAdminMode(username: string): boolean {
-  return false; // Admin is now role-based via Google OAuth
-}
-
 export function getProgress(username: string): Progress {
   if (typeof window === 'undefined') return defaultProgress();
   const saved = localStorage.getItem(storageKey(username));
@@ -34,7 +30,9 @@ export function completeZone(username: string, zoneId: number, score: number): v
 
   // Fire-and-forget server sync for authenticated users (not guest)
   if (username !== 'guest') {
-    saveProgressToServer(zoneId, score).catch(() => {});
+    saveProgressToServer(zoneId, score).catch((err) =>
+      console.error('[progress] server sync failed:', err)
+    );
   }
 }
 
