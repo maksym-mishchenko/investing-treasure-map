@@ -14,6 +14,7 @@ export interface AuthUser {
 }
 
 interface AuthContextValue {
+  progressVersion: number;
   user: AuthUser | null;
   loading: boolean;
   isGuest: boolean;
@@ -21,6 +22,7 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue>({
+  progressVersion: 0,
   user: null,
   loading: true,
   isGuest: true,
@@ -33,7 +35,8 @@ export function useAuth() {
 
 function AuthInner({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
-  const [synced, setSynced] = useState(false);
+  const [syncedEmail, setSyncedEmail] = useState<string | null>(null);
+  const [progressVersion, setProgressVersion] = useState(0);
   const pathname = usePathname();
   const loading = status === 'loading';
 
@@ -51,10 +54,13 @@ function AuthInner({ children }: { children: React.ReactNode }) {
 
   // Sync server progress on first authenticated load
   useEffect(() => {
-    if (user && !synced) {
-      syncProgressFromServer(user.username).then(() => setSynced(true));
+    if (user && user.username !== syncedEmail) {
+      syncProgressFromServer(user.username).then(() => {
+        setSyncedEmail(user.username);
+        setProgressVersion(v => v + 1);
+      });
     }
-  }, [user, synced]);
+  }, [user, syncedEmail]);
 
   if (loading) {
     return (
@@ -72,7 +78,7 @@ function AuthInner({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isGuest, refresh: async () => {} }}>
+    <AuthContext.Provider value={{ user, loading, isGuest, progressVersion, refresh: async () => {} }}>
       {pathname !== '/login' && (
         <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
           {user ? (

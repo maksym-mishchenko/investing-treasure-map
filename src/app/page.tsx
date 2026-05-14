@@ -14,14 +14,15 @@ import CommunityStats from '@/components/CommunityStats';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const { user } = useAuth();
+  const { user, progressVersion } = useAuth();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const username = user?.username ?? 'guest';
-  const completedCount = mounted ? zones.filter(z => isZoneCompleted(username, z.id)).length : 0;
+  // progressVersion changes after server sync completes, forcing re-read from localStorage
+  const completedCount = (mounted || progressVersion > 0) ? zones.filter(z => isZoneCompleted(username, z.id)).length : 0;
   const totalZones = zones.length;
   const allCompleted = completedCount === totalZones;
   const pct = Math.round((completedCount / totalZones) * 100);
@@ -91,8 +92,8 @@ export default function Home() {
         {/* Zone Map */}
         <div className="w-full max-w-md flex flex-col items-center">
           {zones.map((zone, i) => {
-            const unlocked = mounted ? isZoneUnlocked(username, zone.id) : zone.id === 1;
-            const completed = mounted ? isZoneCompleted(username, zone.id) : false;
+            const unlocked = (mounted || progressVersion > 0) ? isZoneUnlocked(username, zone.id) : zone.id === 1;
+            const completed = (mounted || progressVersion > 0) ? isZoneCompleted(username, zone.id) : false;
             const isCurrent = unlocked && !completed;
 
             return (
