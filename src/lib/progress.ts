@@ -66,8 +66,16 @@ export async function syncProgressFromServer(username: string): Promise<void> {
     if (!res.ok) return;
     const data = await res.json();
     if (!data.progress || data.progress.length === 0) {
-      // No server progress — import localStorage to server
-      const local = getProgress(username);
+      // No server progress — import localStorage to server.
+      // Prefer user-keyed progress; fall back to guest progress (user played before signing in).
+      let local = getProgress(username);
+      if (local.completedZones.length === 0) {
+        const guest = getProgress('guest');
+        if (guest.completedZones.length > 0) {
+          local = guest;
+          saveProgress(username, local); // migrate guest progress to user key
+        }
+      }
       if (local.completedZones.length > 0) {
         await fetch('/api/progress/import', {
           method: 'POST',
