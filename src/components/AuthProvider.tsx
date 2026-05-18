@@ -14,7 +14,6 @@ export interface AuthUser {
 }
 
 interface AuthContextValue {
-  progressVersion: number;
   user: AuthUser | null;
   loading: boolean;
   isGuest: boolean;
@@ -22,7 +21,6 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  progressVersion: 0,
   user: null,
   loading: true,
   isGuest: true,
@@ -35,8 +33,7 @@ export function useAuth() {
 
 function AuthInner({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
-  const [syncedEmail, setSyncedEmail] = useState<string | null>(null);
-  const [progressVersion, setProgressVersion] = useState(0);
+  const [synced, setSynced] = useState(false);
   const pathname = usePathname();
   const loading = status === 'loading';
 
@@ -54,13 +51,10 @@ function AuthInner({ children }: { children: React.ReactNode }) {
 
   // Sync server progress on first authenticated load
   useEffect(() => {
-    if (user && user.username !== syncedEmail) {
-      syncProgressFromServer(user.username).then(() => {
-        setSyncedEmail(user.username);
-        setProgressVersion(v => v + 1);
-      });
+    if (user && !synced) {
+      syncProgressFromServer(user.username).then(() => setSynced(true));
     }
-  }, [user, syncedEmail]);
+  }, [user, synced]);
 
   if (loading) {
     return (
@@ -78,7 +72,7 @@ function AuthInner({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isGuest, progressVersion, refresh: async () => {} }}>
+    <AuthContext.Provider value={{ user, loading, isGuest, refresh: async () => {} }}>
       {pathname !== '/login' && (
         <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
           {user ? (
@@ -99,8 +93,8 @@ function AuthInner({ children }: { children: React.ReactNode }) {
               </a>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-[10px] font-neon tracking-widest px-3 py-1.5 rounded transition-all hover:opacity-80 whitespace-nowrap"
-                style={{ backgroundColor: '#ff1744', color: '#000000' }}
+                className="text-[10px] font-neon tracking-widest border border-[#ff1744]/30 px-3 py-1.5 rounded transition-all hover:border-[#ff1744] hover:text-[#ff1744] whitespace-nowrap"
+                style={{ color: 'rgba(255,23,68,0.6)' }}
               >
                 Exit
               </button>
@@ -108,8 +102,8 @@ function AuthInner({ children }: { children: React.ReactNode }) {
           ) : (
             <a
               href="/login"
-              className="text-[10px] font-neon tracking-widest px-3 py-1.5 rounded transition-all hover:opacity-80 whitespace-nowrap"
-              style={{ backgroundColor: '#00e5ff', color: '#000000' }}
+              className="text-[10px] font-neon tracking-widest border border-[#00e5ff]/30 px-3 py-1.5 rounded transition-all hover:border-[#00e5ff] hover:text-[#00e5ff] whitespace-nowrap"
+              style={{ color: 'rgba(0,229,255,0.6)' }}
             >
               Sign In
             </a>

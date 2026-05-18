@@ -14,15 +14,14 @@ import CommunityStats from '@/components/CommunityStats';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const { user, progressVersion } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const username = user?.username ?? 'guest';
-  // progressVersion changes after server sync completes, forcing re-read from localStorage
-  const completedCount = (mounted || progressVersion > 0) ? zones.filter(z => isZoneCompleted(username, z.id)).length : 0;
+  const completedCount = mounted ? zones.filter(z => isZoneCompleted(username, z.id)).length : 0;
   const totalZones = zones.length;
   const allCompleted = completedCount === totalZones;
   const pct = Math.round((completedCount / totalZones) * 100);
@@ -92,8 +91,8 @@ export default function Home() {
         {/* Zone Map */}
         <div className="w-full max-w-md flex flex-col items-center">
           {zones.map((zone, i) => {
-            const unlocked = (mounted || progressVersion > 0) ? isZoneUnlocked(username, zone.id) : zone.id === 1;
-            const completed = (mounted || progressVersion > 0) ? isZoneCompleted(username, zone.id) : false;
+            const unlocked = mounted ? isZoneUnlocked(username, zone.id) : zone.id === 1;
+            const completed = mounted ? isZoneCompleted(username, zone.id) : false;
             const isCurrent = unlocked && !completed;
 
             return (
@@ -150,31 +149,31 @@ export default function Home() {
                           className="text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity"
                           style={{ color: zone.color }}
                         >
-                          <span className="font-bold">→</span>
+                          →
                         </span>
                       </div>
                     </div>
                   </Link>
                 ) : (
                   <div
-                    className="w-full rounded-xl border border-gray-800 p-5"
+                    className="w-full rounded-xl border border-gray-800 p-5 opacity-40"
                     style={{ backgroundColor: 'rgba(255,255,255,0.01)' }}
                   >
                     <div className="flex items-start gap-4">
                       <span className="text-3xl grayscale">🔒</span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-neon tracking-widest text-gray-400">
+                          <span className="text-[10px] font-neon tracking-widest text-gray-600">
                             Zone {zone.id}
                           </span>
-                          <span className="text-[10px] text-gray-400">
+                          <span className="text-[10px] text-gray-700">
                             · {zone.hawkinsLocation}
                           </span>
                         </div>
-                        <h3 className="font-neon text-sm sm:text-base mb-1 tracking-wide text-gray-400">
+                        <h3 className="font-neon text-sm sm:text-base mb-1 tracking-wide text-gray-600">
                           {zone.name}
                         </h3>
-                        <p className="text-xs text-gray-400">Complete Zone {zone.id - 1} to unlock</p>
+                        <p className="text-xs text-gray-700">Complete Zone {zone.id - 1} to unlock</p>
                       </div>
                     </div>
                   </div>
