@@ -10,6 +10,7 @@ export default function CompletionModal() {
 
   useEffect(() => {
     if (localStorage.getItem('completion_feedback_sent') === 'true') return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShow(true);
   }, []);
 

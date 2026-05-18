@@ -15,13 +15,13 @@ export default function LoginPage() {
       />
 
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(6)].map((_, i) => (
+        {[4.2, 2.7, 5.3, 3.1, 4.8, 2.5].map((size, i) => (
           <div
             key={i}
             className="spore"
             style={{
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
+              width: `${size}px`,
+              height: `${size}px`,
               left: `${10 + i * 15}%`,
               animationDelay: `${i * 1.5}s`,
               animationDuration: `${8 + i * 2}s`,
