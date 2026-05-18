@@ -12,6 +12,7 @@ export default function WhatsNewModal() {
   useEffect(() => {
     const seen = localStorage.getItem(WHATS_NEW_KEY);
     if (seen !== currentVersion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShow(true);
     }
   }, [currentVersion]);

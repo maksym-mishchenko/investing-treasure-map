@@ -21,6 +21,7 @@ export default function Particles() {
       delay: `${Math.random() * 10}s`,
       duration: `${Math.random() * 10 + 8}s`,
     }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSpores(generated);
   }, []);
 
