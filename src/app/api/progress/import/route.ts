@@ -41,33 +41,38 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid data" }, { status: 400 })
   }
 
-  const user = await getOrCreateUser(session)
+  try {
+    const user = await getOrCreateUser(session)
 
-  for (const zoneId of completedZones) {
-    if (typeof zoneId !== "number" || zoneId < 1 || zoneId > 7) continue
+    for (const zoneId of completedZones) {
+      if (typeof zoneId !== "number" || zoneId < 1 || zoneId > 7) continue
 
-    const existing = await db.query.progress.findFirst({
-      where: and(eq(progress.userId, user.id), eq(progress.zoneId, zoneId)),
-    })
-
-    const score = quizScores?.[String(zoneId)] ?? null
-
-    if (!existing) {
-      await db.insert(progress).values({
-        id: randomUUID(),
-        userId: user.id,
-        zoneId,
-        completed: true,
-        quizScore: score,
-        completedAt: new Date(),
+      const existing = await db.query.progress.findFirst({
+        where: and(eq(progress.userId, user.id), eq(progress.zoneId, zoneId)),
       })
-    } else if (score && (!existing.quizScore || score > existing.quizScore)) {
-      await db
-        .update(progress)
-        .set({ quizScore: score })
-        .where(eq(progress.id, existing.id))
-    }
-  }
 
-  return Response.json({ success: true, imported: completedZones.length })
+      const score = quizScores?.[String(zoneId)] ?? null
+
+      if (!existing) {
+        await db.insert(progress).values({
+          id: randomUUID(),
+          userId: user.id,
+          zoneId,
+          completed: true,
+          quizScore: score,
+          completedAt: new Date(),
+        })
+      } else if (score && (!existing.quizScore || score > existing.quizScore)) {
+        await db
+          .update(progress)
+          .set({ quizScore: score })
+          .where(eq(progress.id, existing.id))
+      }
+    }
+
+    return Response.json({ success: true, imported: completedZones.length })
+  } catch (err) {
+    console.error('[progress/import/POST] DB error:', err)
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
+  }
 }

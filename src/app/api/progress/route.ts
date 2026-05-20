@@ -31,19 +31,24 @@ export async function GET() {
     return Response.json({ error: "Not authenticated" }, { status: 401 })
   }
 
-  const user = await db.query.users.findFirst({
-    where: eq(users.email, session.user.email),
-  })
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, session.user.email),
+    })
 
-  if (!user) {
-    return Response.json({ progress: [] })
+    if (!user) {
+      return Response.json({ progress: [] })
+    }
+
+    const userProgress = await db
+      .select()
+      .from(progress)
+      .where(eq(progress.userId, user.id))
+    return Response.json({ progress: userProgress })
+  } catch (err) {
+    console.error('[progress/GET] DB error:', err)
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
-
-  const userProgress = await db
-    .select()
-    .from(progress)
-    .where(eq(progress.userId, user.id))
-  return Response.json({ progress: userProgress })
 }
 
 export async function POST(request: Request) {
@@ -63,33 +68,38 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid zone" }, { status: 400 })
   }
 
-  const user = await getOrCreateUser(session)
+  try {
+    const user = await getOrCreateUser(session)
 
-  const existing = await db.query.progress.findFirst({
-    where: and(eq(progress.userId, user.id), eq(progress.zoneId, zoneId)),
-  })
+    const existing = await db.query.progress.findFirst({
+      where: and(eq(progress.userId, user.id), eq(progress.zoneId, zoneId)),
+    })
 
-  if (existing) {
-    await db
-      .update(progress)
-      .set({
+    if (existing) {
+      await db
+        .update(progress)
+        .set({
+          completed: true,
+          quizScore: quizScore ?? existing.quizScore,
+          rating: rating ?? existing.rating,
+          completedAt: new Date(),
+        })
+        .where(eq(progress.id, existing.id))
+    } else {
+      await db.insert(progress).values({
+        id: randomUUID(),
+        userId: user.id,
+        zoneId,
         completed: true,
-        quizScore: quizScore ?? existing.quizScore,
-        rating: rating ?? existing.rating,
+        quizScore: quizScore ?? null,
+        rating: rating ?? null,
         completedAt: new Date(),
       })
-      .where(eq(progress.id, existing.id))
-  } else {
-    await db.insert(progress).values({
-      id: randomUUID(),
-      userId: user.id,
-      zoneId,
-      completed: true,
-      quizScore: quizScore ?? null,
-      rating: rating ?? null,
-      completedAt: new Date(),
-    })
-  }
+    }
 
-  return Response.json({ success: true })
+    return Response.json({ success: true })
+  } catch (err) {
+    console.error('[progress/POST] DB error:', err)
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
+  }
 }

@@ -31,20 +31,25 @@ export async function GET() {
     return Response.json({ error: "Not authenticated" }, { status: 401 })
   }
 
-  const user = await db.query.users.findFirst({
-    where: eq(users.email, session.user.email),
-  })
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, session.user.email),
+    })
 
-  if (!user) {
-    return Response.json({ entries: [] })
+    if (!user) {
+      return Response.json({ entries: [] })
+    }
+
+    const entries = await db
+      .select()
+      .from(journalEntries)
+      .where(eq(journalEntries.userId, user.id))
+
+    return Response.json({ entries })
+  } catch (err) {
+    console.error('[journal/GET] DB error:', err)
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
-
-  const entries = await db
-    .select()
-    .from(journalEntries)
-    .where(eq(journalEntries.userId, user.id))
-
-  return Response.json({ entries })
 }
 
 export async function POST(request: Request) {
@@ -64,30 +69,35 @@ export async function POST(request: Request) {
     return Response.json({ error: "Content required (max 500 chars)" }, { status: 400 })
   }
 
-  const user = await getOrCreateUser(session)
+  try {
+    const user = await getOrCreateUser(session)
 
-  const existing = await db.query.journalEntries.findFirst({
-    where: and(
-      eq(journalEntries.userId, user.id),
-      eq(journalEntries.zoneId, zoneId),
-    ),
-  })
-
-  if (existing) {
-    await db
-      .update(journalEntries)
-      .set({ content, updatedAt: new Date() })
-      .where(eq(journalEntries.id, existing.id))
-  } else {
-    await db.insert(journalEntries).values({
-      id: randomUUID(),
-      userId: user.id,
-      zoneId,
-      content,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+    const existing = await db.query.journalEntries.findFirst({
+      where: and(
+        eq(journalEntries.userId, user.id),
+        eq(journalEntries.zoneId, zoneId),
+      ),
     })
-  }
 
-  return Response.json({ success: true })
+    if (existing) {
+      await db
+        .update(journalEntries)
+        .set({ content, updatedAt: new Date() })
+        .where(eq(journalEntries.id, existing.id))
+    } else {
+      await db.insert(journalEntries).values({
+        id: randomUUID(),
+        userId: user.id,
+        zoneId,
+        content,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    }
+
+    return Response.json({ success: true })
+  } catch (err) {
+    console.error('[journal/POST] DB error:', err)
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
+  }
 }
