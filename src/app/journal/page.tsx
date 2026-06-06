@@ -38,7 +38,7 @@ export default function JournalPage() {
   }
 
   const sortedEntries = [...entries].sort((a, b) => a.zoneId - b.zoneId)
-  const allZonesCovered = sortedEntries.length === 7
+  const allZonesCovered = sortedEntries.length === zones.length
 
   return (
     <div className="min-h-screen relative">

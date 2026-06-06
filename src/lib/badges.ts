@@ -13,7 +13,7 @@ export const BADGES: BadgeDefinition[] = [
   { id: 'number-cruncher', name: 'Number Cruncher', description: 'Complete Financial Statements', icon: '📊', hint: 'Complete Zone 4' },
   { id: 'stock-detective', name: 'Stock Detective', description: 'Complete Stock Picking', icon: '🔍', hint: 'Complete Zone 5' },
   { id: 'dividend-collector', name: 'Dividend Collector', description: 'Complete the Dividends zone', icon: '❄️', hint: 'Complete Zone 6' },
-  { id: 'portfolio-architect', name: 'Portfolio Architect', description: 'Complete all 7 zones', icon: '⚔️', hint: 'Complete all zones' },
+  { id: 'portfolio-architect', name: 'Portfolio Architect', description: 'Complete all zones', icon: '⚔️', hint: 'Complete all zones' },
   { id: 'speed-runner', name: 'Speed Runner', description: 'Complete all zones in one day', icon: '⚡', hint: 'Finish everything in 24 hours' },
   { id: 'perfectionist', name: 'Perfectionist', description: 'Score 100% on any quiz', icon: '💎', hint: 'Get a perfect quiz score' },
   { id: 'feedback-hero', name: 'Feedback Hero', description: 'Submit feedback or topic request', icon: '💬', hint: 'Share your thoughts' },

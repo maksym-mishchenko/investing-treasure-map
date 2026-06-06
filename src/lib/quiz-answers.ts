@@ -181,4 +181,31 @@ export const quizAnswers: Record<string, { correctIndex: number; explanation: st
         'Time in the market consistently beats timing the market. Regular contributions + patience = the most reliable wealth builder.',
     },
   ],
+  'tax-advantaged': [
+    {
+      correctIndex: 1,
+      explanation:
+        'Traditional 401(k) contributions are pre-tax — they reduce your taxable income today. You pay taxes when you withdraw in retirement, ideally at a lower rate.',
+    },
+    {
+      correctIndex: 1,
+      explanation:
+        'Roth IRA contributions come from after-tax dollars. The magic: all future growth and qualified withdrawals are completely tax-free.',
+    },
+    {
+      correctIndex: 1,
+      explanation:
+        'Contributing $10,000 to a traditional 401(k) reduces your taxable income from $80,000 to $70,000. That\'s a real tax saving today.',
+    },
+    {
+      correctIndex: 1,
+      explanation:
+        'Employer match is literally free money added to your retirement account. It\'s an instant 50–100% return on your contribution — no investment comes close.',
+    },
+    {
+      correctIndex: 1,
+      explanation:
+        'Not capturing the full employer match is the most common and costly investing mistake. Always contribute at least enough to get the full match — it\'s the highest guaranteed return available.',
+    },
+  ],
 };
