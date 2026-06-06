@@ -1,6 +1,7 @@
 import { db } from "@/lib/db"
 import { users, progress } from "@/lib/db/schema"
 import { eq, count, sql } from "drizzle-orm"
+import { zones } from "@/lib/zones"
 
 let cache: { data: Record<string, unknown>; expires: number } | null = null
 
@@ -24,15 +25,9 @@ export async function GET() {
       .orderBy(sql`count(*) desc`)
       .limit(1)
 
-    const zoneNames: Record<number, string> = {
-      1: "Why Investing",
-      2: "Index Funds",
-      3: "REITs",
-      4: "Financial Statements",
-      5: "Stock Picking",
-      6: "Dividends",
-      7: "Portfolio",
-    }
+    const zoneNames: Record<number, string> = Object.fromEntries(
+      zones.map((z) => [z.id, z.subtitle])
+    )
 
     const data = {
       users: userCount.count,

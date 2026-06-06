@@ -9,7 +9,7 @@
 
 ## ✨ Features
 
-- 🧠 **6 Learning Zones** — From money mindset to portfolio building, each themed as a Hawkins location
+- 🧠 **8 Learning Zones** — From money mindset to portfolio building, each themed as a Hawkins location
 - 📚 **Curated Resources** — Books, podcasts, movies, and articles for each topic
 - 🎯 **Interactive Quizzes** — Test your knowledge after each zone with multiple-choice questions
 - 🔓 **Progressive Unlocking** — Complete quizzes to unlock the next zone on the map

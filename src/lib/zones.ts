@@ -664,4 +664,93 @@ export const zones: Zone[] = [
     calculator: 'portfolio',
     journalPrompt: "Write your one-sentence investment plan.",
   },
+  {
+    id: 8,
+    slug: 'tax-advantaged',
+    name: "Hopper's Secret Files",
+    subtitle: 'Tax-Advantaged Accounts & Retirement',
+    icon: '🗂️',
+    hawkinsLocation: 'Hawkins Police Department',
+    color: '#b0bec5',
+    description:
+      "Like Hopper digging through classified files in the police basement, most investors miss the most powerful legal tax shelters available to them. 401(k)s, IRAs, and Roth accounts let your money compound tax-free or tax-deferred — the single biggest legal advantage available to every investor. Understanding these accounts is the difference between retiring comfortably and leaving tens of thousands of dollars on the table.",
+    resources: [
+      {
+        type: 'book',
+        title: 'The Little Book of Common Sense Investing',
+        author: 'John C. Bogle',
+        description:
+          "Bogle's definitive case for low-cost index fund investing inside tax-advantaged accounts. Short, clear, and backed by decades of data.",
+        emoji: '📖',
+      },
+      {
+        type: 'article',
+        title: 'IRS — Retirement Plans for Self-Employed',
+        author: 'IRS',
+        description:
+          'Official IRS guidance on retirement accounts — 401(k), IRA, Roth IRA, SEP-IRA. Dry but authoritative; the primary source for contribution limits and rules.',
+        url: 'https://www.irs.gov/retirement-plans',
+        emoji: '📰',
+      },
+      {
+        type: 'podcast',
+        title: 'Mad Fientist',
+        author: 'Brandon',
+        description:
+          'Deep dives into tax optimization for early retirement. The best resource for understanding how to legally minimize your tax burden while building wealth.',
+        url: 'https://www.madfientist.com/podcast/',
+        emoji: '🎧',
+      },
+    ],
+    quiz: [
+      {
+        question: 'What is the main benefit of a traditional 401(k)?',
+        options: [
+          'Contributions are tax-free and withdrawals are also tax-free',
+          'Contributions reduce your taxable income today; taxes paid on withdrawal',
+          'The government matches 100% of your contributions',
+          'No contribution limits apply',
+        ],
+      },
+      {
+        question: 'What makes a Roth IRA different from a traditional IRA?',
+        options: [
+          'Roth contributions are tax-deductible; traditional are not',
+          'Roth contributions are after-tax; qualified withdrawals in retirement are tax-free',
+          'Roth accounts have higher contribution limits',
+          "There's no difference — they're the same account",
+        ],
+      },
+      {
+        question: 'You earn $80,000/year and contribute $10,000 to a traditional 401(k). What income do you pay tax on?',
+        options: [
+          '$80,000',
+          '$70,000',
+          '$90,000',
+          '$10,000',
+        ],
+      },
+      {
+        question: 'What is "employer match" in a 401(k)?',
+        options: [
+          'A fee your employer charges for plan administration',
+          'Free money — your employer contributes a percentage of what you put in',
+          'A government subsidy paid to your employer',
+          'A matching penalty if you withdraw early',
+        ],
+      },
+      {
+        question: 'If your employer offers a 401(k) match and you are not contributing enough to get the full match, you are:',
+        options: [
+          'Being financially conservative',
+          'Leaving free money on the table — always capture the full match first',
+          'Reducing your tax liability correctly',
+          'Following the recommended savings rate',
+        ],
+      },
+    ],
+    keyTakeaway:
+      "Tax-advantaged accounts are the single most impactful tool available to ordinary investors. Contribute enough to capture any employer match, then max your Roth IRA, then fill the 401(k). In that order.",
+    journalPrompt: "Do you currently use any tax-advantaged accounts? What's your plan?",
+  },
 ];
