@@ -10,6 +10,10 @@
 **Rejected:** <alternatives and why not> (optional)
 
 -->
+## [2026-09-02] Consolidate CI around application checks and one Gitleaks workflow  #infra #build
+**What:** Kept `ci.yml`, retained `gitleaks.yml` as the sole secret scan with `main` push and pull-request triggers, and removed the duplicate `secret-scan.yml` plus advisory `agent-state-freshness.yml`.
+**Why:** Application checks and secret scanning remain intact while redundant feature-branch runs and advisory memory-policy CI are removed.
+
 ## [2026-05-20] Extract shared auth helper to reduce duplication  #api
 **What:** Refactored `getOrCreateUser()` out of 4 API routes (badges, journal, progress, progress/import) into shared `lib/auth-helpers.ts` (27f4e43).
 **Why:** The same user validation/creation pattern was duplicated across routes; centralizing it makes changes propagate safely and avoids drift.
